@@ -1,0 +1,27 @@
+# Pesados: se instalan con INSTALAR.bat (herramientas/instalar.py)
+runtime/
+libs/
+motor_local/llama/
+motor_local/modelos/
+motor_local/descargas/
+
+# PDF oficiales: se descargan de ri.gob.do con sus URL del catalogo
+corpus/pdf/
+
+# Lo que el chatbot escribe mientras funciona (memoria, caches, registros)
+datos/
+
+# Configuracion local (puede llevar ajustes de este PC)
+config.json
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Resultados de evaluaciones con respuestas completas (se regeneran)
+evaluacion/resultados/*.json
+
+# El programa de Windows se compila en cada PC (escritorio/construir.bat)
+Chatbot Mensura.exe

@@ -1,0 +1,29 @@
+{
+  "_leeme": [
+    "Copia este archivo como config.json para cambiar algo. Sin config.json todo va por defecto.",
+    "modelo_chat: 'auto' elige el mejor modelo de motor_local/modelos/ que quepa en el equipo.",
+    "dispositivo: 'auto' usa la tarjeta grafica dedicada (si no cabe entero, reparte con el procesador); 'cpu' fuerza el procesador.",
+    "contexto / paralelo / hilos: 0 = los decide el plan segun la memoria y los nucleos del equipo.",
+    "margen_vram_mb: memoria de la tarjeta que se deja libre para otros programas (AutoCAD).",
+    "liberar_tras_minutos: tras ese tiempo sin preguntas se suelta la GPU y la RAM (0 = nunca).",
+    "actualizacion: revisa ri.gob.do cada 'cada_dias' dias a la 'hora' indicada (0-23)."
+  ],
+  "motor_local": {
+    "modelo_chat": "auto",
+    "modelo_embeddings": "auto",
+    "dispositivo": "auto",
+    "contexto": 0,
+    "paralelo": 0,
+    "hilos": 0,
+    "margen_vram_mb": 768,
+    "liberar_tras_minutos": 20,
+    "max_tokens": 450,
+    "temperatura": 0.15,
+    "segundos_maximos": 150
+  },
+  "actualizacion": {
+    "activa": true,
+    "cada_dias": 7,
+    "hora": 3
+  }
+}

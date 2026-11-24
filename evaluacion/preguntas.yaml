@@ -1,0 +1,826 @@
+# Batería de evaluación del Chatbot Mensura. Generada a partir de las citas verificadas
+# de los YAML del Revisor X. Cada `esperado` sale de un `fundamento` real (ver `origen`).
+version: 1
+preguntas:
+  - id: P001
+    pregunta: ¿Cuánto puede diferir la superficie medida de la que dice la constancia anotada en un deslinde?
+    categoria: tolerancias
+    tramite: deslinde
+    esperado:
+    - norma: RES-790-2022
+      articulo: Art. 13
+      subdivision: literal e
+    dato_clave: '5'
+    origen: reglas/tolerancias.yaml
+  - id: P002
+    pregunta: y si el terreno no esta cerrado por cercas ni limites materiales, se permite alguna diferencia de area?
+    categoria: tolerancias
+    tramite: deslinde
+    esperado:
+    - norma: RES-790-2022
+      articulo: Art. 13
+      subdivision: literal f
+    origen: reglas/tolerancias.yaml
+  - id: P003
+    pregunta: ¿Qué variación de superficie se tolera en una regularización parcelaria respecto al acto de transferencia?
+    categoria: tolerancias
+    tramite: regularizacion_parcelaria
+    esperado:
+    - norma: RES-790-2022
+      articulo: Art. 7
+      subdivision: literal c
+    dato_clave: '5'
+    origen: reglas/tolerancias.yaml
+  - id: P004
+    pregunta: ¿Cuál es el error máximo que se acepta en las coordenadas de cada vértice de la parcela?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 118
+    dato_clave: 10 cm
+    origen: reglas/tolerancias.yaml
+  - id: P005
+    pregunta: Tolerancia para los PG?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 119
+    dato_clave: 5 cm
+    origen: reglas/tolerancias.yaml
+  - id: P006
+    pregunta: ¿Se admite algún error de cierre en la poligonal o tiene que cuadrar exacto?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 115
+      subdivision: Párrafo II
+    origen: reglas/tolerancias.yaml
+  - id: P007
+    pregunta: ¿Con cuántos decimales se expresan las medidas lineales y a qué unidad van las superficies en el plano?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 115
+      subdivision: Párrafo I
+    dato_clave: dos decimales
+    origen: reglas/tolerancias.yaml
+  - id: P008
+    pregunta: ¿Cuántos centímetros de solape se aceptan entre dos mensuras en zona urbana?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 166
+      subdivision: literal a
+    dato_clave: '0.20'
+    origen: reglas/tolerancias.yaml
+  - id: P009
+    pregunta: En zona rural, hasta cuanto puede solaparse un plano con otro sin que cuente como superposicion?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 166
+      subdivision: literal b
+    dato_clave: '0.40'
+    origen: reglas/tolerancias.yaml
+  - id: P010
+    pregunta: ¿Qué proyección cartográfica hay que usar para dibujar los planos de una mensura?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 129
+    dato_clave: zona 19
+    origen: reglas/tolerancias.yaml
+  - id: P011
+    pregunta: ¿En qué marco de referencia se georreferencian los levantamientos parcelarios?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-3644-2016
+      articulo: Art. 4
+    dato_clave: IGS08
+    origen: reglas/tolerancias.yaml
+  - id: P012
+    pregunta: ¿Cuántos puntos georreferenciados hay que monumentar cerca del inmueble y cuántas épocas se observan en cada uno?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-3644-2016
+      articulo: Art. 6
+    dato_clave: '180'
+    origen: reglas/tolerancias.yaml
+  - id: P013
+    pregunta: En RTK, ¿cuántas épocas se toman en los puntos de cambio de dirección?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-3644-2016
+      articulo: Art. 6
+      subdivision: Párrafo III
+    dato_clave: 10 épocas
+    origen: reglas/tolerancias.yaml
+  - id: P014
+    pregunta: ¿Qué longitud máxima puede tener una poligonal entre dos pares de puntos georreferenciados?
+    categoria: tolerancias
+    esperado:
+    - norma: RES-3644-2016
+      articulo: Art. 10
+    dato_clave: 500 metros
+    origen: reglas/tolerancias.yaml
+  - id: P015
+    pregunta: ¿Con cuántos días de anticipación hay que comunicar a los titulares de derechos y cargas el inicio de los trabajos de campo?
+    categoria: plazos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 78
+    dato_clave: diez (10)
+    origen: reglas/linea_de_tiempo.yaml
+  - id: P016
+    pregunta: ¿plazo del aviso de mensura a los colindantes antes de arrancar el levantamiento?
+    categoria: plazos
+    esperado:
+    - norma: DNMC-DT-2023-001
+      articulo: Sección 5
+      subdivision: Secciones 5 y 13
+    dato_clave: diez (10)
+    origen: reglas/tolerancias.yaml
+  - id: P017
+    pregunta: ¿Qué antigüedad máxima puede tener la certificación del estado jurídico del inmueble al depositar?
+    categoria: plazos
+    esperado:
+    - norma: DNMC-DT-2023-001
+      articulo: Art. 21
+    dato_clave: treinta (30)
+    origen: reglas/tolerancias.yaml
+  - id: P018
+    pregunta: ¿De cuántos días dispone el agrimensor para subsanar las observaciones de la Regional?
+    categoria: plazos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 33
+      subdivision: Párrafo II
+    dato_clave: treinta (30)
+    origen: reglas/tolerancias.yaml
+  - id: P019
+    pregunta: ¿Se puede pedir prórroga para corregir las observaciones? ¿Por cuánto tiempo?
+    categoria: plazos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 33
+      subdivision: Párrafo III
+    dato_clave: treinta (30)
+    origen: reglas/tolerancias.yaml
+  - id: P020
+    pregunta: ¿Cuántas veces se puede reingresar un expediente por las mismas observaciones?
+    categoria: plazos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 33
+      subdivision: Párrafo V
+    dato_clave: dos (2)
+    origen: reglas/tolerancias.yaml
+  - id: P021
+    pregunta: ¿Qué pasa si se vence el plazo y no corregí lo observado?
+    categoria: plazos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 33
+      subdivision: Párrafo VI
+    dato_clave: caducidad
+    origen: reglas/tolerancias.yaml
+  - id: P022
+    pregunta: ¿Cuánto tiempo dura la anotación en el Registro Complementario de que un inmueble está en proceso de regularización?
+    categoria: plazos
+    tramite: regularizacion_parcelaria
+    esperado:
+    - norma: RES-82-2025
+      articulo: Art. 2
+      subdivision: nuevo Párr. VI del Art. 6 de la RES-790-2022
+    - norma: RES-82-2025
+      articulo: Art. 5
+      subdivision: nuevo Párr. VII del Art. 12
+    dato_clave: un (1) año
+    origen: reglas/tolerancias.yaml
+  - id: P023
+    pregunta: ¿Qué datos debe llevar el acta de hitos y mensura?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 121
+    origen: reglas/documentos.yaml
+  - id: P024
+    pregunta: ¿El acta de hitos se firma solo en la última hoja?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 121
+      subdivision: literal n
+    origen: reglas/planos.yaml
+  - id: P025
+    pregunta: Si el acta tiene tachaduras o enmiendas, ¿cómo se corrigen?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 121
+      subdivision: Párrafo
+    origen: reglas/documentos.yaml
+  - id: P026
+    pregunta: ¿Qué debe contener la carta de conformidad y quién la firma?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 122
+    origen: reglas/documentos.yaml
+  - id: P027
+    pregunta: ¿Qué se incluye en el informe técnico de mensura?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 123
+    origen: reglas/documentos.yaml
+  - id: P028
+    pregunta: ¿Qué debe traer el archivo de coordenadas que se deposita con el expediente?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 124
+    origen: reglas/documentos.yaml
+  - id: P029
+    pregunta: ¿Puedo agregar documentación adicional al expediente si creo que ayuda a entender el trabajo?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 125
+    origen: reglas/documentos.yaml
+  - id: P030
+    pregunta: ¿Se aceptan documentos digitales en el depósito o hay que llevarlo todo físico?
+    categoria: documentos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 126
+    origen: reglas/documentos.yaml
+  - id: P031
+    pregunta: ¿En qué parte del plano va la carátula?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 131
+    dato_clave: inferior derecho
+    origen: reglas/planos.yaml
+  - id: P032
+    pregunta: ¿Qué datos del agrimensor tienen que aparecer en la carátula?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 131
+      subdivision: literal d
+    dato_clave: Codia
+    origen: reglas/planos.yaml
+  - id: P033
+    pregunta: ¿Qué escalas se pueden usar en los planos?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 133
+    dato_clave: '75'
+    origen: reglas/planos.yaml
+  - id: P034
+    pregunta: ¿Hay que poner el norte o el meridiano en el plano?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 132
+    origen: reglas/planos.yaml
+  - id: P035
+    pregunta: Los colindantes en el plano individual, ¿se ponen con nombre y con designación catastral?
+    categoria: planos
+    esperado:
+    - norma: RES-790-2022
+      articulo: Art. 7
+      subdivision: literal d
+    origen: reglas/planos.yaml
+  - id: P036
+    pregunta: ¿Qué tabla de puntos georreferenciados debe llevar cada plano?
+    categoria: planos
+    esperado:
+    - norma: RES-3644-2016
+      articulo: Art. 8
+    origen: reglas/planos.yaml
+  - id: P037
+    pregunta: Si la parcela colinda con la costa, ¿qué leyenda lleva el plano?
+    categoria: planos
+    esperado:
+    - norma: DNMC-DT-2023-008
+      articulo: Art. 7
+    dato_clave: Zona Marítima
+    origen: reglas/planos.yaml
+  - id: P038
+    pregunta: ¿Qué leyenda lleva un plano que rectifica uno ya aprobado?
+    categoria: planos
+    esperado:
+    - norma: DNMC-DT-2023-008
+      articulo: Art. 8
+    dato_clave: sustituye al aprobado
+    origen: reglas/planos.yaml
+  - id: P039
+    pregunta: ¿En qué orden se numeran los vértices del polígono?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 134
+      subdivision: literal b
+    dato_clave: horario
+    origen: reglas/tramites/deslinde.yaml
+  - id: P040
+    pregunta: ¿Qué se entiende por primera copia inalterable del plano y quién la firma?
+    categoria: planos
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 127
+    dato_clave: primera copia inalterable
+    origen: reglas/planos.yaml
+  - id: P041
+    pregunta: ¿Qué debe decir la comunicación que el agrimensor envía a colindantes y partes?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 6
+      subdivision: Párrafo I
+    origen: reglas/notificaciones.yaml
+  - id: P042
+    pregunta: ¿La comunicación del agrimensor necesita acuse de recibo?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 6
+      subdivision: Párrafo III
+    dato_clave: acuse de recibido
+    origen: reglas/notificaciones.yaml
+  - id: P043
+    pregunta: ¿Qué es el aviso de mensura y a quién va dirigido?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 7
+    origen: reglas/notificaciones.yaml
+  - id: P044
+    pregunta: ¿En qué periódicos hay que publicar los trabajos y qué requisito tiene la publicación para depositar?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 8
+    dato_clave: circulación nacional
+    origen: reglas/notificaciones.yaml
+  - id: P045
+    pregunta: Si la publicación en el periódico salió con un error, ¿se puede corregir con una fe de errata?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 8
+      subdivision: Párrafo III
+    origen: reglas/notificaciones.yaml
+  - id: P046
+    pregunta: ¿Hay que notificar a la junta de vecinos?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 10
+    dato_clave: junta de vecinos
+    origen: reglas/notificaciones.yaml
+  - id: P047
+    pregunta: Si el área medida difiere de la del título, ¿a quién se notifica y qué debe decir la notificación?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 11
+    origen: reglas/notificaciones.yaml
+  - id: P048
+    pregunta: ¿Cuándo hay que notificar al Ministerio de Medio Ambiente?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 12
+    origen: reglas/notificaciones.yaml
+  - id: P049
+    pregunta: ¿Cómo se hace la publicidad cuando el colindante tiene domicilio desconocido?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 15
+    dato_clave: alguacil
+    origen: reglas/notificaciones.yaml
+  - id: P050
+    pregunta: ¿De qué tamaño debe ser el letrero de aviso de mensura en el terreno?
+    categoria: publicidad
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 17
+    dato_clave: 81.28 cm
+    origen: reglas/notificaciones.yaml
+  - id: P051
+    pregunta: ¿El texto del letrero es igual en deslinde y en regularización parcelaria?
+    categoria: publicidad
+    tramite: deslinde
+    esperado:
+    - norma: DNMC-DT-2023-009
+      articulo: Art. 17
+    origen: reglas/notificaciones.yaml
+  - id: P052
+    pregunta: ¿Qué PDOP máximo se permite en un levantamiento GNSS estático?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 4
+    dato_clave: '1.50'
+    origen: reglas/levantamiento.yaml
+  - id: P053
+    pregunta: ¿Qué debe traer el reporte de calidad de un levantamiento estático?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 4
+      subdivision: Párrafo V
+    origen: reglas/levantamiento.yaml
+  - id: P054
+    pregunta: Para RTK por NTRIP, ¿cuál es la distancia máxima a la CORS?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 5
+      subdivision: literal a
+    dato_clave: 40 km
+    origen: reglas/levantamiento.yaml
+  - id: P055
+    pregunta: ¿Sobre qué punto debe instalarse la base cuando se levanta con RTK base y móvil?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 5
+      subdivision: literal b
+    origen: reglas/levantamiento.yaml
+  - id: P056
+    pregunta: Con estación total, cada cuántos metros hay que colocar puntos de control?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 6
+    dato_clave: '500'
+    origen: reglas/levantamiento.yaml
+  - id: P057
+    pregunta: ¿Se puede presentar un levantamiento hecho con un GPS de mano?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 7
+    origen: reglas/levantamiento.yaml
+  - id: P058
+    pregunta: ¿Sirve un polígono dibujado sobre imagen satelital para una mensura?
+    categoria: levantamiento
+    esperado:
+    - norma: DNMC-DT-2023-007
+      articulo: Art. 8
+    origen: reglas/levantamiento.yaml
+  - id: P059
+    pregunta: ¿Cómo se forma la designación catastral temporal de un expediente?
+    categoria: designacion_catastral
+    esperado:
+    - norma: DNMC-DT-2023-003
+      articulo: Art. 6
+      subdivision: literal a
+    origen: reglas/designacion_catastral.yaml
+  - id: P060
+    pregunta: ¿Cuántos dígitos tiene la designación posicional y de dónde salen?
+    categoria: designacion_catastral
+    esperado:
+    - norma: DNMC-DT-2023-003
+      articulo: Art. 6
+      subdivision: literal b
+    dato_clave: '12'
+    origen: reglas/designacion_catastral.yaml
+  - id: P061
+    pregunta: ¿Cómo se calcula la designación posicional a partir del centroide?
+    categoria: designacion_catastral
+    esperado:
+    - norma: DNMC-DT-2023-003
+      articulo: Art. 7
+    dato_clave: centroide
+    origen: reglas/designacion_catastral.yaml
+  - id: P062
+    pregunta: ¿Se puede reutilizar una designación catastral que fue anulada?
+    categoria: designacion_catastral
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 137
+      subdivision: Párrafo
+    origen: reglas/designacion_catastral.yaml
+  - id: P063
+    pregunta: Si rectifico una mensura sin tocar la parcela, cambia la designación?
+    categoria: designacion_catastral
+    esperado:
+    - norma: DNMC-DT-2023-003
+      articulo: Art. 8
+      subdivision: Párrafo IV
+    origen: reglas/designacion_catastral.yaml
+  - id: P064
+    pregunta: ¿Cuándo se considera que dos mensuras están superpuestas?
+    categoria: superposiciones
+    esperado:
+    - norma: RES-3645-2016
+      articulo: Art. 4
+      subdivision: numeral 3
+    origen: reglas/superposiciones.yaml
+  - id: P065
+    pregunta: ¿Qué es una superposición física real y por qué no la resuelve la Regional?
+    categoria: superposiciones
+    esperado:
+    - norma: RES-3645-2016
+      articulo: Art. 4
+      subdivision: numeral 4
+    origen: reglas/superposiciones.yaml
+  - id: P066
+    pregunta: ¿Qué es una superposición cartográfica?
+    categoria: superposiciones
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 167
+    origen: reglas/superposiciones.yaml
+  - id: P067
+    pregunta: ¿Se puede presentar una regularización parcelaria junto con otras operaciones, por ejemplo con un saneamiento?
+    categoria: combinadas
+    tramite: regularizacion_parcelaria
+    esperado:
+    - norma: RES-82-2025
+      articulo: Art. 1
+      subdivision: Art. 5 Párr. VIII de la RES-790-2022
+    dato_clave: saneamiento
+    origen: reglas/combinadas.yaml
+  - id: P068
+    pregunta: ¿Procede regularizar una porción con colindantes desconocidos?
+    categoria: combinadas
+    tramite: regularizacion_parcelaria
+    esperado:
+    - norma: RES-82-2025
+      articulo: Art. 1
+      subdivision: Art. 5 Párr. XIII de la RES-790-2022
+    dato_clave: colindantes desconocidos
+    origen: reglas/combinadas.yaml
+  - id: P069
+    pregunta: ¿Qué condiciones debe cumplir una ocupación para poder regularizarla?
+    categoria: combinadas
+    tramite: regularizacion_parcelaria
+    esperado:
+    - norma: RES-82-2025
+      articulo: Art. 1
+      subdivision: nuevo Art. 5 de la RES-790-2022
+    origen: reglas/tramites/regularizacion_parcelaria.yaml
+  - id: P070
+    pregunta: Una parcela en regimen de condominio, ¿se puede subdividir o refundir?
+    categoria: combinadas
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 192
+      subdivision: Párrafo I
+    dato_clave: condominio
+    origen: reglas/combinadas.yaml
+  - id: P071
+    pregunta: ¿Se pueden depositar varias actuaciones técnicas en un mismo expediente?
+    categoria: combinadas
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 6
+    origen: reglas/deposito.yaml
+  - id: P072
+    pregunta: ¿Qué es una subdivisión según el reglamento de mensuras?
+    categoria: tramites
+    tramite: subdivision
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 154
+    origen: reglas/tramites/subdivision.yaml
+  - id: P073
+    pregunta: ¿Qué es una refundición y qué condición deben cumplir las parcelas?
+    categoria: tramites
+    tramite: refundicion
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 155
+    dato_clave: colindantes
+    origen: reglas/tramites/refundicion.yaml
+  - id: P074
+    pregunta: ¿Puedo refundir parcelas que solo tienen constancia anotada?
+    categoria: tramites
+    tramite: refundicion
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 155
+    origen: reglas/tramites/refundicion.yaml
+  - id: P075
+    pregunta: Si la subdivision implica abrir calles o caminos publicos, que tramite corresponde?
+    categoria: tramites
+    tramite: subdivision
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 156
+    dato_clave: urbanización
+    origen: reglas/tramites/subdivision.yaml
+  - id: P076
+    pregunta: ¿Cuántos años de posesión se exigen para un saneamiento y qué características debe tener?
+    categoria: tramites
+    tramite: saneamiento
+    esperado:
+    - norma: RES-3643-2016
+      articulo: Considerando 9
+    dato_clave: veinte (20)
+    origen: reglas/tramites/saneamiento.yaml
+  - id: P077
+    pregunta: ¿Qué documentos exclusivos hay que anexar a la solicitud de saneamiento?
+    categoria: tramites
+    tramite: saneamiento
+    esperado:
+    - norma: RES-3643-2016
+      articulo: Art. 3
+      subdivision: Párrafo
+    dato_clave: mosaico
+    origen: reglas/tramites/saneamiento.yaml
+  - id: P078
+    pregunta: ¿Hay que depositar un archivo KML en el saneamiento?
+    categoria: tramites
+    tramite: saneamiento
+    esperado:
+    - norma: RES-3643-2016
+      articulo: Art. 3
+      subdivision: Párrafo, numeral 4
+    dato_clave: KML
+    origen: reglas/tramites/saneamiento.yaml
+  - id: P079
+    pregunta: ¿Hay que hacer estudio de títulos antes de ejecutar una mensura para saneamiento, y se limita al inmueble?
+    categoria: tramites
+    tramite: saneamiento
+    esperado:
+    - norma: RES-3643-2016
+      articulo: Art. 2
+    origen: reglas/tramites/saneamiento.yaml
+  - id: P080
+    pregunta: En saneamiento, ¿se compara la superficie medida con algún título?
+    categoria: tramites
+    tramite: saneamiento
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 139
+      subdivision: literal b
+    origen: reglas/tramites/saneamiento.yaml
+  - id: P081
+    pregunta: ¿Qué debe decir la instancia de solicitud de autorización sobre el tipo de trabajo?
+    categoria: tramites
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 38
+      subdivision: literal c
+    origen: reglas/tramites/refundicion.yaml
+  - id: P082
+    pregunta: En una refundicion con cargas o gravamenes, ¿que documento define la prelación de los derechos?
+    categoria: tramites
+    tramite: refundicion
+    esperado:
+    - norma: RES-789-2022
+      articulo: Art. 84
+      subdivision: Párrafo III
+    origen: reglas/tramites/refundicion.yaml
+  - id: P083
+    pregunta: Si al depositar le falta un documento al expediente, ¿lo rechazan en ventanilla?
+    categoria: deposito
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 7
+    origen: reglas/deposito.yaml
+  - id: P084
+    pregunta: ¿Qué hago si un documento requerido ya está depositado en otro expediente en trámite?
+    categoria: deposito
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 8
+    dato_clave: copia certificada
+    origen: reglas/deposito.yaml
+  - id: P085
+    pregunta: ¿Quién puede depositar un expediente técnico, solo el agrimensor o también un gestor?
+    categoria: deposito
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 13
+    dato_clave: gestores
+    origen: reglas/deposito.yaml
+  - id: P086
+    pregunta: ¿A qué Dirección Regional corresponde el número de expediente?
+    categoria: deposito
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 10
+    origen: reglas/deposito.yaml
+  - id: P087
+    pregunta: ¿Se puede hacer el depósito en un Registro de Títulos en vez de la Regional?
+    categoria: deposito
+    esperado:
+    - norma: DNMC-DT-2023-002
+      articulo: Art. 9
+    origen: reglas/deposito.yaml
+  - id: P088
+    pregunta: ¿Qué es el cuadre de áreas?
+    categoria: definiciones_sin_cita
+    esperado: []
+    origen: docs/04_GLOSARIO.md
+  - id: P089
+    pregunta: ¿Qué diferencia hay entre área de derecho y área de mensura?
+    categoria: definiciones_sin_cita
+    esperado: []
+    origen: docs/04_GLOSARIO.md
+  - id: P090
+    pregunta: ¿Qué es un PG en una mensura?
+    categoria: definiciones_sin_cita
+    esperado: []
+    origen: docs/04_GLOSARIO.md
+  - id: P091
+    pregunta: ¿Qué significa que me hagan un reingreso del expediente?
+    categoria: definiciones_sin_cita
+    esperado: []
+    origen: docs/04_GLOSARIO.md
+  - id: P092
+    pregunta: ¿Sigue vigente la Resolución 3642-2016 de desjudicialización de deslinde?
+    categoria: derogadas
+    esperado:
+    - norma: RES-790-2022
+      articulo: Art. 21
+    origen: conocimiento/normativa/CATALOGO.yaml
+  - id: P093
+    pregunta: ¿Todavía se aplica el reglamento general de mensuras de 2018 (Resolución 2454-2018)?
+    categoria: derogadas
+    esperado:
+    - norma: RES-789-2022
+      articulo: null
+    origen: conocimiento/normativa/CATALOGO.yaml
+  - id: P094
+    pregunta: Esta vigente la resolucion 355-2009 sobre regularizacion y deslinde?
+    categoria: derogadas
+    esperado:
+    - norma: RES-790-2022
+      articulo: null
+    origen: conocimiento/normativa/CATALOGO.yaml
+  - id: P095
+    pregunta: ¿Qué reglamento de registro de títulos reemplazó a la Resolución 2669-2009?
+    categoria: derogadas
+    esperado:
+    - norma: RES-788-2022
+      articulo: null
+    origen: conocimiento/normativa/CATALOGO.yaml
+  - id: P096
+    pregunta: ¿Sigue rigiendo la Resolución 1737-2007 sobre los tribunales superiores de tierras?
+    categoria: derogadas
+    esperado:
+    - norma: RES-787-2022
+      articulo: null
+    origen: conocimiento/normativa/CATALOGO.yaml
+  - id: P097
+    pregunta: ¿Cuánto cobra un agrimensor por un deslinde?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P098
+    pregunta: ¿Cuál es la normativa de mensura catastral en Colombia?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P099
+    pregunta: ¿Qué impuesto de la DGII se paga por transferir un inmueble?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P100
+    pregunta: ¿A cuánto está el metro cuadrado de terreno en Punta Cana?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P101
+    pregunta: ¿Cómo hago un hatch en AutoCAD para rellenar un polígono?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P102
+    pregunta: ¿Cuánto tarda un tribunal de tierras en fallar una litis sobre derechos registrados?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P103
+    pregunta: como saco el certificado de antecedentes penales
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P104
+    pregunta: ¿Qué receptor GNSS me recomiendan comprar, Trimble o Topcon?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P105
+    pregunta: ¿Cuál es la tasa de interés de los préstamos hipotecarios del Banco Popular?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)
+  - id: P106
+    pregunta: ¿Qué documentos necesito para sacar una licencia de construcción en el ayuntamiento?
+    categoria: fuera_de_alcance
+    esperado: []
+    origen: ninguno (fuera del alcance de la normativa)

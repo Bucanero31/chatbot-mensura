@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatbot Mensura · Lexgeo</title>
+<link rel="icon" type="image/png" href="icono.png">
+<link rel="stylesheet" href="lexgeo.css">
+<link rel="stylesheet" href="chat.css">
+</head>
+<body class="chat-pagina">
+<header class="lx-cabecera">
+  <div class="lx-marca">
+    <span class="lx-logo">LX</span>
+    <div>
+      <h1>Chatbot Mensura</h1>
+      <p>Normativa de mensura y registro inmobiliario</p>
+    </div>
+  </div>
+  <div class="chat-acciones">
+    <span id="estado" class="chat-estado" role="status" aria-live="polite">
+      <i class="punto" aria-hidden="true"></i><span class="txt">Comprobando…</span>
+    </span>
+    <button id="btn-novedades" class="chat-insignia lx-oculto" type="button"
+            aria-label="Ver novedades de la normativa">Normativa actualizada</button>
+    <button id="btn-nueva" class="lx-boton lx-secundario chat-chico" type="button"
+            aria-label="Empezar una nueva conversación">Nueva conversación</button>
+    <a id="volver" class="lx-volver lx-oculto" href="/">← Herramientas</a>
+  </div>
+</header>
+
+<main id="hilo" class="chat-hilo" aria-live="polite" aria-label="Conversación">
+  <div class="chat-columna" id="columna"></div>
+</main>
+
+<div class="chat-compositor">
+  <form id="form" class="chat-columna chat-form" autocomplete="off">
+    <textarea id="entrada" rows="1" placeholder="Escribe tu pregunta sobre la normativa…"
+              aria-label="Pregunta"></textarea>
+    <button id="enviar" class="lx-boton chat-enviar" type="submit" aria-label="Enviar pregunta">Enviar</button>
+  </form>
+  <p class="chat-pie">Respuestas basadas en la normativa oficial cargada. No sustituye la consulta del texto oficial ni el criterio profesional.</p>
+</div>
+
+<aside id="panel" class="chat-panel" role="dialog" aria-modal="false" aria-label="Fuente" hidden>
+  <div class="panel-cab">
+    <strong id="panel-titulo">Fuente</strong>
+    <button id="panel-cerrar" class="panel-x" type="button" aria-label="Cerrar la fuente">✕</button>
+  </div>
+  <div id="panel-cuerpo" class="panel-cuerpo"></div>
+</aside>
+
+<dialog id="dlg-nov" class="chat-dialogo" aria-label="Novedades de la normativa">
+  <h2>Novedades de la normativa</h2>
+  <div id="dlg-lista"></div>
+  <button id="dlg-cerrar" class="lx-boton lx-secundario" type="button" aria-label="Cerrar">Cerrar</button>
+</dialog>
+
+<script src="chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# ASCII puro: pip lee este archivo con la codificacion de Windows (cp1252).
+#
+# Para RESPONDER el chatbot no necesita nada: solo la biblioteca estandar de Python 3.12+.
+# Esto hace falta para RECONSTRUIR el corpus desde los PDF y para el actualizador:
+pymupdf==1.28.2
+pyyaml==6.0.3
+# Y para las pruebas:
+pytest>=8

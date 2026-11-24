@@ -1,0 +1,38 @@
+# Normas que el chatbot tiene y el catálogo del Revisor X NO.
+#
+# Se funde con el CATALOGO.yaml del Revisor X en `herramientas/sincronizar_desde_revisor.py`
+# (y lo usa también el actualizador automático). Un id que ya exista allí se COMPLETA con lo
+# de aquí; uno nuevo se añade.
+#
+# `paginas` (1-based, inclusivo) permite tomar una norma de un PDF que trae varias.
+
+leyes:
+  - id: LEY-108-05
+    titulo: Ley de Registro Inmobiliario (con las modificaciones de la Ley 51-07)
+    anio: 2005
+    fecha: 2005-03-23
+    estado: vigente
+    relevancia: critica
+    url: https://ri.gob.do/wp-content/uploads/Download/51-07.pdf
+    archivo: leyes/SCJ-normativa-jurisdiccion-inmobiliaria-2011.pdf
+    paginas: "13-64"
+    texto_consolidado: true
+    nota: >-
+      Texto tomado de la compilación oficial «Normativa de la Jurisdicción Inmobiliaria»
+      (3.ª edición, Suprema Corte de Justicia, marzo de 2011), que publica la Ley 108-05 con
+      las modificaciones de la Ley 51-07 ya incorporadas; cada artículo modificado lo indica
+      en su propio texto. Es el archivo que ri.gob.do enlaza como «Ley 51-07»: el enlace de
+      «Ley 108-05» de su índice apunta al mismo PDF (comprobado el 24-nov-2026).
+
+  - id: LEY-51-07
+    titulo: >-
+      Ley que modifica varios artículos de la Ley 108-05 de Registro Inmobiliario y
+      restablece la Ley 317 de 1968 sobre el Catastro Nacional
+    anio: 2007
+    fecha: 2007-04-23
+    estado: vigente
+    relevancia: alta
+    url: https://ri.gob.do/wp-content/uploads/Download/51-07.pdf
+    archivo: leyes/SCJ-normativa-jurisdiccion-inmobiliaria-2011.pdf
+    paginas: "67-79"
+    nota: Mismo PDF que la Ley 108-05 (compilación oficial de la SCJ, 2011).

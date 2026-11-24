@@ -1,0 +1,70 @@
+{
+ "tolerancia": [
+  "variacion",
+  "admite",
+  "diferencia",
+  "margen"
+ ],
+ "area": [
+  "superficie"
+ ],
+ "colindancia": [
+  "colindante",
+  "lindero",
+  "limite"
+ ],
+ "publicidad": [
+  "aviso",
+  "notificacion",
+  "publicacion",
+  "letrero"
+ ],
+ "plazo": [
+  "dias",
+  "anticipacion",
+  "vigencia",
+  "termino"
+ ],
+ "insubsanable": [
+  "rechazo",
+  "inadmisible",
+  "no procede",
+  "nulidad"
+ ],
+ "caratula": [
+  "tarjeta",
+  "recuadro",
+  "cajetin",
+  "rotulo"
+ ],
+ "representacion": [
+  "apoderado",
+  "poder",
+  "representante",
+  "mandato"
+ ],
+ "superposicion": [
+  "superpuesta",
+  "solape",
+  "invade",
+  "traslape"
+ ],
+ "cierre": [
+  "error",
+  "precision",
+  "poligonal",
+  "compensacion"
+ ],
+ "camino": [
+  "via",
+  "acceso",
+  "servidumbre",
+  "transito"
+ ],
+ "habilitacion": [
+  "habilitado",
+  "registro de profesionales",
+  "codia",
+  "matricula"
+ ]
+}

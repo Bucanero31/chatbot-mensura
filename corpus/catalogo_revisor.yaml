@@ -1,0 +1,392 @@
+version: 1.0.0
+actualizado: 2026-08-06
+version_corpus: 2026-08
+fuentes:
+  resoluciones: https://ri.gob.do/?page_id=699
+  leyes: https://ri.gob.do/?page_id=6929
+  marco_legal: https://ri.gob.do/?page_id=6917
+  disposiciones_tecnicas: https://ri.gob.do/?page_id=8066
+  dt_mensuras_catastrales: https://ri.gob.do/?page_id=679
+  dt_registro_titulos: https://ri.gob.do/?page_id=8013
+  consulta_publica: https://ri.gob.do/?cat=79
+leyes:
+- id: LEY-108-05
+  titulo: Ley de Registro Inmobiliario
+  anio: 2005
+  estado: vigente
+  relevancia: alta
+  url: por_confirmar
+  nota: Ley madre. Verificar si el texto publicado incorpora modificaciones posteriores.
+- id: LEY-64-00
+  titulo: Ley General sobre Medio Ambiente y Recursos Naturales
+  anio: 2000
+  estado: por_confirmar
+  relevancia: media
+  url: por_confirmar
+  nota: No es normativa del RI, pero la regional la invoca para observar. Solo importa para inmuebles
+    en área protegida o zona de amortiguamiento. Ver OFI-025 en reglas/observaciones_oficina.yaml.
+- id: LEY-202-04
+  titulo: Ley Sectorial de Áreas Protegidas
+  anio: 2004
+  estado: por_confirmar
+  relevancia: media
+  url: por_confirmar
+  nota: Ver LEY-64-00.
+resoluciones:
+- id: RES-82-2025
+  titulo: Resolución que modifica la Resolución 790-2022 (Reglamento para la Regularización Parcelaria
+    y el Deslinde) y deroga el Párrafo II del Art. 54 de la Resolución 787-2022
+  anio: 2025
+  fecha: 2025-10-09
+  emisor: Pleno de la Suprema Corte de Justicia
+  estado: vigente
+  relevancia: critica
+  archivo: vigente/RPJ_resolucion_82_2025.pdf
+  minada: 2026-08-26
+  nota: 'ES la modificación de la Suprema Corte de octubre de 2025 que el proyecto llevaba meses esperando
+    (antiguo pendiente §B). Entra en vigencia el día de su publicación. Modifica los Arts. 5, 6, 8, 9
+    y 12 de la RES-790-2022 y deroga el Art. 54 Párr. II de la RES-787-2022. Leída completa: NO toca los
+    Arts. 7 ni 13, así que la tolerancia del 5 % de diferencia de área sigue vigente tal como estaba escrita.'
+  modifica:
+  - norma: RES-790-2022
+    articulos:
+    - 5
+    - 6
+    - 8
+    - 9
+    - 12
+  - norma: RES-787-2022
+    articulos:
+    - 54 Párrafo II (derogado)
+- id: RES-790-2022
+  titulo: Reglamento para la Regularización Parcelaria y el Deslinde
+  anio: 2022
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_790-2022.pdf
+  modificada_por:
+  - norma: RES-82-2025
+    fecha: 2025-10-09
+    articulos:
+    - 5
+    - 6
+    - 8
+    - 9
+    - 12
+  alerta: 'RESUELTO el 2026-08-26. La modificación de la Suprema Corte de octubre de 2025 es la RES-82-2025,
+    ya catalogada y minada. Afecta a los Arts. 5, 6, 8, 9 y 12; los Arts. 7 y 13 quedan intactos. IMPORTANTE:
+    el PDF descargado de esta norma es el texto ORIGINAL de 2022 y NO incorpora la modificación. Para
+    los artículos modificados manda el texto de la RES-82-2025; para el resto, este PDF.'
+- id: RES-789-2022
+  titulo: Reglamento General de Mensuras Catastrales
+  anio: 2022
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_789-2022.pdf
+  reemplaza: RES-2454-2018
+- id: RES-788-2022
+  titulo: Reglamento General de Registro de Títulos
+  anio: 2022
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_788-2022.pdf
+- id: RES-787-2022
+  titulo: Reglamento General de los Tribunales de la Jurisdicción Inmobiliaria
+  anio: 2022
+  estado: vigente
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_787-2022.pdf
+- id: RES-008-2020
+  titulo: Reglamento del Registro Inmobiliario
+  anio: 2020
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_008-2020.pdf
+- id: RES-3645-2016
+  titulo: Reglamento sobre Soluciones de Mensuras Superpuestas
+  anio: 2016
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_3645-2016.pdf
+- id: RES-3644-2016
+  titulo: Reglamento para el uso de Coordenadas de la Red de Estaciones Permanentes y Levantamientos Parcelarios
+  anio: 2016
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_3644-2016.pdf
+- id: RES-3643-2016
+  titulo: Reglamento para la Solicitud de Autorización de Mensura para Saneamiento
+  anio: 2016
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_3643-2016.pdf
+  nota: Necesaria cuando se agregue el trámite de saneamiento (fase 6).
+- id: RES-3642-2016
+  titulo: Reglamento de Desjudicialización de Deslinde y Procedimientos Diversos
+  anio: 2016
+  estado: derogada
+  reemplazada_por: RES-790-2022
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_3642-2016.pdf
+  evidencia_derogacion:
+  - norma: RES-790-2022
+    articulo: Art. 21
+    alcance: total
+    cita: La presente resolución deroga la Resolución núm. 3642-2016, de fecha 15 de diciembre de 2016,
+      que instituye el Reglamento de Desjudicialización de Deslinde y Procedimientos Diversos, y cualquier
+      disposición en contrario.
+  - norma: RES-789-2022
+    articulo: Art. 245
+    alcance: arts. 1, 2, 8, 12-20 y 23
+  nota: '⚠️ Estaba mal catalogada como vigente hasta el 2026-08-06. Sigue apareciendo en el índice de
+    resoluciones de ri.gob.do, que no distingue vigentes de derogadas: el índice es una lista de documentos,
+    no un registro de vigencia.'
+- id: RES-01-2016
+  titulo: Modifica reglamentos de los Tribunales Superiores de Tierras y de Jurisdicción Original
+  anio: 2016
+  estado: por_confirmar
+  posible_reemplazo: RES-787-2022
+  relevancia: baja
+  nota: Modificaba el reglamento de la RES-1737-2007, que la RES-787-2022 reemplazó. Deducción sólida,
+    sin derogación expresa leída. Se marca por_confirmar, no derogada.
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_01-2016.pdf
+- id: RES-11-2011
+  titulo: Modifica las tasas por servicios de la Jurisdicción Inmobiliaria
+  anio: 2011
+  estado: por_confirmar
+  relevancia: alta
+  url: por_confirmar
+  nota: Citada en los VISTOS de DNMC-DT-2023-008 y de DNMC-DT-2023-002. NO aparece en el índice de resoluciones
+    de ri.gob.do. Las tasas las fija el Consejo del Poder Judicial, así que puede haber versiones posteriores.
+    Sin ella, el motor verifica que EXISTA el comprobante de pago pero no puede validar montos.
+  accion: Buscar la tabla de tasas vigente del Consejo del Poder Judicial.
+- id: RES-3461-2010
+  titulo: Reglamento para la Actualización Parcelaria y Registral de Inmuebles Complejos
+  anio: 2010
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_3461-2010.pdf
+- id: RES-2454-2018
+  titulo: Reglamento General de Mensuras Catastrales (anterior)
+  anio: 2018
+  estado: derogada
+  reemplazada_por: RES-789-2022
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_2454-2018.pdf
+- id: RES-2669-2009
+  titulo: Reglamento General de Registro de Títulos (anterior)
+  anio: 2009
+  estado: derogada
+  reemplazada_por: RES-788-2022
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_2669-2009.pdf
+- id: RES-628-2009
+  titulo: Reglamento General de Mensuras Catastrales (anterior)
+  anio: 2009
+  estado: derogada
+  reemplazada_por: RES-2454-2018
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_628-2009.pdf
+- id: RES-355-2009
+  titulo: Reglamento para la Regularización Parcelaria y el Deslinde (anterior)
+  anio: 2009
+  estado: derogada
+  reemplazada_por: RES-790-2022
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_355-2009.pdf
+- id: RES-1737-2007
+  titulo: Reglamento de los Tribunales Superiores de Tierras y de Jurisdicción Original
+  anio: 2007
+  estado: derogada
+  reemplazada_por: RES-787-2022
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_1737-2007.pdf
+- id: RES-517-2007
+  titulo: Reglamento para el Control y Reducción de Constancias Anotadas
+  anio: 2007
+  estado: por_confirmar
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Resolucion/Resolucion_517-2007.pdf
+disposiciones_tecnicas_dnmc:
+- id: DNMC-DT-2023-001
+  titulo: Requisitos para Actuaciones Técnicas
+  anio: 2023
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-001-Requisitos-para-Actuaciones-Técnicas.pdf
+  alimenta:
+  - matriz de documentos por trámite
+  - reglas/tramites/*.yaml
+- id: DNMC-DT-2023-002
+  titulo: Recepción y Entrega
+  anio: 2023
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-002-Recepción-y-Entrega.pdf
+  alimenta:
+  - causales de rechazo en recepción
+  - plazos
+  - reingresos
+- id: DNMC-DT-2023-003
+  titulo: Designación Catastral
+  anio: 2023
+  estado: vigente
+  relevancia: alta
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-003-Designación-Catastral.pdf
+  alimenta:
+  - validación de formato de designación catastral
+- id: DNMC-DT-2023-004
+  titulo: Aspectos de División para Constitución en Condominio
+  anio: 2023
+  estado: vigente
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-004-Aspectos-División-para-Constitución-en-Condominio.pdf
+- id: DNMC-DT-2023-005
+  titulo: Peritajes Catastrales
+  anio: 2023
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-005-Peritajes-Catastrales.pdf
+- id: DNMC-DT-2023-006
+  titulo: Registro de los Profesionales Habilitados
+  anio: 2023
+  estado: vigente
+  relevancia: alta
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-006-Registro-de-los-Profesionales-Habilitados.pdf
+  alimenta:
+  - validación de CODIA y habilitación del agrimensor
+- id: DNMC-DT-2023-007
+  titulo: Ejecución de Levantamientos Parcelarios
+  anio: 2023
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-007-Ejecución-de-Levantamientos-Parcelarios.pdf
+  alimenta:
+  - tolerancias.geodesia — RMSE
+  - cierre poligonal
+  - red geodésica
+- id: DNMC-DT-2023-008
+  titulo: Formatos y Contenido de los Planos
+  anio: 2023
+  estado: vigente
+  relevancia: critica
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-008-Formatos-y-Contenido-de-los-Planos.pdf
+  alimenta:
+  - validaciones FIR de firmas
+  - contenido obligatorio del plano
+  - formato
+- id: DNMC-DT-2023-009
+  titulo: Publicidad en los Actos de Levantamientos
+  anio: 2023
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2023/08/DNMC-DT-2023-009-Publicidad-en-los-Actos-de-Levantamientos.pdf
+- id: DNMC-DT-2021-001
+  titulo: Actuaciones Técnicas
+  anio: 2021
+  estado: derogada
+  reemplazada_por: DNMC-DT-2023-001
+  base: Misma materia (Actuaciones Técnicas), norma posterior del mismo nivel. Sin derogación expresa
+    leída.
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2021/03/Resolución-DNMC-DT-2021-001-Actuaciones-Técnicas.pdf
+  nota: Probablemente sustituida por DNMC-DT-2023-001. Confirmar antes de indexar como vigente.
+- id: DNMC-DT-2021-002
+  titulo: Recepción y Entrega
+  anio: 2021
+  estado: derogada
+  reemplazada_por: DNMC-DT-2023-002
+  base: Misma materia (Recepción y Entrega), norma posterior del mismo nivel. Sin derogación expresa leída.
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2021/03/Resolución-DNMC-DT-2021-002-_Recepción-y-Entrega.pdf
+  nota: Probablemente sustituida por DNMC-DT-2023-002. Confirmar.
+- id: DT-003-2009
+  titulo: Políticas Generales sobre Dimensiones del Aviso de Deslinde
+  anio: 2009
+  estado: derogada
+  reemplazada_por: DNMC-DT-2023-009
+  base: Misma materia (Aviso / letrero de mensura), norma posterior del mismo nivel. Sin derogación expresa
+    leída.
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Disposiciones_Tecnicas/Disposicion_003-2009.pdf
+- id: DT-005-2008
+  titulo: Políticas Generales sobre Formatos y Contenidos de los Planos
+  anio: 2008
+  estado: derogada
+  reemplazada_por: DNMC-DT-2023-008
+  base: Misma materia (Formatos y Contenidos de los Planos), norma posterior del mismo nivel. Sin derogación
+    expresa leída.
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/Marco_Legal/Disposiciones_Tecnicas/Disposicion_005-2008.pdf
+  nota: Probablemente sustituida por DNMC-DT-2023-008.
+disposiciones_tecnicas_dnrt:
+- id: DNRT-DT-2025-003
+  titulo: Requisitos para Actuaciones Registrales
+  anio: 2025
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2025/12/Disposicio%CC%81n-Te%CC%81cnica-sobre-Requisitos-para-Actuaciones-Registrales-DNRT-DT-2025-003.pdf
+  nota: Sustituye a DNRT-DT-2021-0001 (confirmar).
+- id: DNRT-DT-2025-002
+  titulo: Recepción y Entrega ante Registro de Títulos
+  anio: 2025
+  estado: vigente
+  relevancia: media
+  url: https://ri.gob.do/wp-content/uploads/2025/12/Disposición_Técnica_sobre_Recepción_y_Entrega_ante_Registro_de_Títulos___DNRT-DT-2025-002.pdf
+- id: DNRT-DT-2025-001
+  titulo: Anotaciones Preventivas, Inscripciones Provisionales y Anotaciones Informativas
+  anio: 2025
+  estado: vigente
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/2025/10/Disposicion_Tecnica_sobre_Anotaciones_Preventivas_Inscripciones_Provisionales_y_Anotaciones_Informativas-DNRT-DT-2025-001.pdf
+- id: DNRT-DT-2024-001
+  titulo: Servicio de Alertas Registrales
+  anio: 2024
+  estado: vigente
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/2025/10/disposicion_tecnica_que_establece_el_servicio_de_alertas_registrales___dnrt-dt-2024-001_signed.pdf
+- id: DNRT-DT-2021-0001
+  titulo: Requisitos para Actuaciones Registrales
+  anio: 2021
+  estado: derogada
+  reemplazada_por: DNRT-DT-2025-003
+  base: Misma materia (Requisitos para Actuaciones Registrales), norma posterior del mismo nivel. Sin
+    derogación expresa leída.
+  relevancia: baja
+  url: https://ri.gob.do/wp-content/uploads/2021/03/Resolución-DNRT-DT-2021-0001-Requisitos-para-Actuaciones-Registrales.pdf
+vigilancia:
+- fuente: Portal RI · Resoluciones
+  url: https://ri.gob.do/?page_id=699
+  frecuencia: mensual
+  detecta: resoluciones nuevas o reemplazadas
+- fuente: Portal RI · Disposiciones técnicas DNMC
+  url: https://ri.gob.do/?page_id=679
+  frecuencia: mensual
+  detecta: disposiciones técnicas nuevas
+  nota: La fuente de mayor valor operativo para este proyecto.
+- fuente: Portal RI · Consulta pública
+  url: https://ri.gob.do/?cat=79
+  frecuencia: mensual
+  detecta: proyectos de disposición antes de entrar en vigencia
+  nota: Da semanas de ventaja para preparar los cambios de reglas.
+- fuente: Suprema Corte de Justicia
+  url: https://poderjudicial.gob.do
+  frecuencia: mensual
+  detecta: modificaciones a reglamentos por vía jurisdiccional
+  nota: LA FUENTE MÁS PELIGROSA. Un cambio aquí (como el de octubre de 2025 sobre la Res. 790-2022) NO
+    aparece como resolución nueva en el portal del RI, y el PDF publicado allí puede seguir mostrando
+    el texto anterior.
+- fuente: Gaceta Oficial / Consultoría Jurídica del Poder Ejecutivo
+  url: https://consultoria.gob.do
+  frecuencia: mensual
+  detecta: modificaciones a la Ley 108-05 y normas conexas
+- fuente: CODIA
+  url: https://codia.org.do
+  frecuencia: mensual
+  detecta: circulares y criterios del colegio profesional
+- fuente: Artículos de Derogaciones de las normas nuevas
+  url: (dentro de cada PDF descargado)
+  frecuencia: al incorporar cada norma
+  detecta: qué norma vieja queda sin efecto
+  nota: El índice de ri.gob.do NO marca las derogadas. La única evidencia fiable es el artículo de Derogaciones
+    de la norma nueva. Ver reglas/jerarquia_normativa.yaml.
+- fuente: Consejo del Poder Judicial · tasas por servicios
+  url: https://poderjudicial.gob.do
+  frecuencia: mensual
+  detecta: modificaciones a las tasas por servicios de la Jurisdicción Inmobiliaria
+  nota: Las tasas no están en el índice de resoluciones del RI. Sin esta tabla el motor no puede validar
+    montos, solo la presencia del comprobante.

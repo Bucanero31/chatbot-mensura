@@ -1,0 +1,142 @@
+# Vocabulario: como lo llamamos nosotros -> como lo llama la norma
+#
+# version: 1.0.0
+# estado: en_uso
+# actualizado: 2026-08-31
+#
+# POR QUE EXISTE ESTE ARCHIVO
+#
+# Al construir M5 (ADR-0005) se probo el criterio de aceptacion de su CLAUDE.md: "consultar
+# 'tolerancia de area en deslinde' recupera el articulo correcto entre los 3 primeros". No lo
+# recuperaba, y la causa no era el buscador: **la palabra "tolerancia" no esta en el articulo**.
+# El Art. 13 lit. e de la RES-790-2022 dice "solo se admite una variacion de hasta un cinco
+# por ciento (5%) si la superficie real de la porcion difiere respecto de la superficie
+# identificada en la constancia anotada". Ni "tolerancia" ni "area".
+#
+# Medido en el corpus indexado: "tolerancia" aparece en 19 fragmentos de 2.509, y nunca junto
+# a "area". El vocabulario del proyecto es el del agrimensor; el del texto es el del legislador.
+# Sin este puente, la recuperacion falla de forma sistematica y silenciosa, que es la peor
+# manera de fallar.
+#
+# COMO SE USA
+#
+# Antes de consultar el indice, M5 sustituye cada termino nuestro por el grupo de palabras que
+# la norma usa de verdad. No se pierde el termino original: se anade, porque en las
+# disposiciones tecnicas mas recientes si aparece.
+#
+# COMO SE AMPLIA
+#
+# Cuando una recuperacion falle, comprobar primero si es esto: buscar la palabra en el indice
+# (`py herramientas/indexar_normativa.py --buscar "<palabra>"`). Si aparece en muy pocos
+# fragmentos, es vocabulario nuestro y hay que anadir la entrada aqui, con la cita del texto
+# real en `visto_en`. Nunca inventar sinonimos "que suenan bien": tienen que estar medidos.
+
+sinonimos:
+  tolerancia:
+    equivalentes: [variacion, admite, diferencia, margen]
+    visto_en: >-
+      RES-790-2022 Art. 13 lit. e: "solo se admite una variacion de hasta un cinco por
+      ciento (5%)". La norma no usa "tolerancia" para las areas.
+    verificado: true
+
+  area:
+    equivalentes: [superficie]
+    visto_en: >-
+      Todo el RGMC habla de "superficie", no de "area". "Area" aparece casi solo en "area
+      institucional" y "area protegida", que son otra cosa.
+    verificado: true
+
+  colindancia:
+    equivalentes: [colindante, lindero, limite]
+    visto_en: RES-789-2022 Arts. 84 y 159, que hablan de "linderos" y "colindantes".
+    verificado: true
+
+  publicidad:
+    equivalentes: [aviso, notificacion, publicacion, letrero]
+    visto_en: >-
+      DNMC-DT-2023-009 trata la publicidad enumerando sus medios; los articulos concretos
+      dicen "aviso de mensura", "publicacion" y "letrero".
+    verificado: true
+
+  plazo:
+    equivalentes: [dias, anticipacion, vigencia, termino]
+    visto_en: RES-790-2022 Art. 6, que fija los dias de anticipacion sin usar "plazo".
+    verificado: true
+
+  insubsanable:
+    equivalentes: [rechazo, inadmisible, no procede, nulidad]
+    visto_en: >-
+      Ninguna norma usa "insubsanable": es termino nuestro, tomado de la practica de la
+      Regional. Las normas describen la consecuencia, no la etiquetan.
+    verificado: true
+
+  caratula:
+    equivalentes: [tarjeta, recuadro, cajetin, rotulo]
+    visto_en: >-
+      DNMC-DT-2023-008 y RES-789-2022 Art. 133 dicen "recuadro de observaciones" y
+      "tarjeta del plano".
+    verificado: true
+
+  representacion:
+    equivalentes: [apoderado, poder, representante, mandato]
+    visto_en: DNMC-DT-2023-001 Art. 11 num. 13.
+    verificado: true
+
+  superposicion:
+    equivalentes: [superpuesta, solape, invade, traslape]
+    visto_en: >-
+      RES-3645-2016 y RES-789-2022 Art. 166 dicen "mensura superpuesta", en femenino y
+      como adjetivo, no "superposicion".
+    verificado: true
+
+  cierre:
+    equivalentes: [error, precision, poligonal, compensacion]
+    visto_en: RES-789-2022, capitulo de ejecucion de la mensura.
+    verificado: true
+
+  camino:
+    equivalentes: [via, acceso, servidumbre, transito]
+    visto_en: RES-789-2022 Art. 84 Parr. I y Art. 159.
+    verificado: true
+
+  habilitacion:
+    equivalentes: [habilitado, registro de profesionales, codia, matricula]
+    visto_en: DNMC-DT-2023-006, Registro de Profesionales Habilitados.
+    verificado: false
+    nota: >-
+      La DT-2023-006 aun no esta minada (PENDIENTES seccion F). Los equivalentes salen del
+      titulo de la norma, no de su texto: contrastar al minarla.
+
+# Palabras que aparecen en practicamente todos los articulos y por tanto no discriminan.
+# Se quitan de la consulta antes de buscar. Con ellas dentro, "tolerancia de area en
+# deslinde" devolvia cualquier articulo que repitiera "para" muchas veces.
+vacias:
+  - del
+  - los
+  - las
+  - por
+  - para
+  - que
+  - con
+  - una
+  - unos
+  - unas
+  - sus
+  - este
+  - esta
+  - estos
+  - estas
+  - cuando
+  - sobre
+  - como
+  - sea
+  - ser
+  - son
+  - debe
+  - deben
+  - establecido
+  - establecidos
+  - general
+  - generales
+  - caso
+  - casos

@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LEXGEO — Sistema de diseño · v3.0 (estilo Apple, 05-nov-2026)
+
+   ESTE ARCHIVO ES EL ORIGINAL. Las copias que hay dentro de cada
+   herramienta se generan con:
+
+       py sincronizar.py
+
+   No edites las copias: se pisan. Edita este y vuelve a sincronizar.
+
+   Cómo se usa: se enlaza esta hoja y luego la propia de la herramienta.
+   Todo lo de aquí empieza por «lx-» para no chocar con nada.
+
+   v3 (decidido por Henry el 05-nov-2026): estilo Apple puro, solo modo
+   claro. Grises de sistema, el azul de Apple como único acento, letra del
+   sistema (San Francisco en Mac, Segoe UI Variable en Windows 11), barra
+   superior blanca translúcida, botones en píldora, tarjetas sin borde con
+   sombra muy suave. Los NOMBRES de variables y clases son los de la v2
+   (--lx-azul, .lx-cabecera, .lx-boton…): las herramientas no se tocan para
+   cambiar de aspecto, solo sus valores.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── color (paleta de sistema de Apple) ─────────────────────────── */
+  --lx-azul:          #0071e3;   /* acento: botones, enlaces, foco */
+  --lx-azul-oscuro:   #1d1d1f;   /* texto fuerte (antes: degradado de cabecera) */
+  --lx-azul-medio:    #0066cc;   /* enlaces */
+  --lx-azul-claro:    #0071e3;   /* foco, bordes, barras de avance; y algunas herramientas lo usan como TEXTO: con #2997ff no llegaba a 3:1 */
+  --lx-azul-tenue:    #f5f5f7;   /* fondos suaves */
+  --lx-accent:        #0071e3;
+  --lx-accent-soft:   #e8f2fd;
+
+  --lx-fondo:         #f5f5f7;
+  --lx-papel:         #ffffff;
+  --lx-tinta:         #1d1d1f;
+  --lx-tinta-suave:   #424245;
+  --lx-tinta-tenue:   #6e6e73;
+  --lx-borde:         #d2d2d7;
+  --lx-borde-soft:    #e8e8ed;
+
+  --lx-bien:          #248a3d;
+  --lx-bien-soft:     #eaf7ee;
+  --lx-ojo:           #b25000;
+  --lx-ojo-fondo:     #fff6e8;
+  --lx-mal:           #d70015;
+  --lx-mal-fondo:     #fff1f1;
+
+  /* ── medidas ───────────────────────────────────────────────────── */
+  --lx-radio:         18px;
+  --lx-radio-chico:   12px;
+  --lx-radio-pill:    980px;
+  --lx-sombra:        0 1px 2px rgba(0,0,0,.04), 0 4px 18px rgba(0,0,0,.05);
+  --lx-sombra-alta:   0 2px 6px rgba(0,0,0,.04), 0 14px 36px rgba(0,0,0,.10);
+  --lx-sombra-header: none;
+  --lx-ancho:         1180px;
+  --lx-ancho-estrecho: 760px;
+  --lx-foco:          0 0 0 4px rgba(0,113,227,.28);
+  --lx-barra-alto:    52px;
+
+  /* ── letra: la del sistema ─────────────────────────────────────── */
+  --lx-letra: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text",
+              "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --lx-letra-titulo: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display",
+              "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --lx-letra-fija: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+
+  color-scheme: light;   /* solo claro (decidido el 05-nov-2026) */
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--lx-letra);
+  background: var(--lx-fondo);
+  color: var(--lx-tinta);
+  line-height: 1.5;
+  font-size: 15px;
+  letter-spacing: -.01em;
+}
+
+a { color: var(--lx-azul-medio); }
+/* Los controles no heredan la letra en los navegadores: sin esto salen en Arial */
+button, input, select, textarea { font-family: inherit; }
+
+/* ── barra superior (estilo Apple: blanca, translúcida, fina) ────── */
+.lx-cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: var(--lx-barra-alto);
+  background: rgba(255,255,255,.78);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  color: var(--lx-tinta);
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+.lx-cabecera > * { position: relative; }
+
+.lx-marca { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.lx-logo {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--lx-tinta);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 11.5px; letter-spacing: .4px;
+  text-decoration: none; color: #fff;
+  flex: none;
+  transition: transform .2s, opacity .2s;
+}
+a.lx-logo:hover { opacity: .85; }
+
+.lx-cabecera h1 {
+  margin: 0; font-family: var(--lx-letra-titulo);
+  font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: var(--lx-tinta);
+}
+.lx-cabecera p  { margin: 1px 0 0; font-size: 12.5px; color: var(--lx-tinta-tenue); max-width: 120ch; font-weight: 400; }
+.lx-cabecera p strong { font-weight: 600; color: var(--lx-tinta); }
+
+/* Volver al portal — enlace «‹ Herramientas» como en las apps de Apple */
+.lx-volver {
+  color: var(--lx-azul-medio); text-decoration: none; font-size: 14px; font-weight: 400;
+  padding: 6px 12px; border-radius: var(--lx-radio-pill);
+  background: transparent;
+  white-space: nowrap;
+  transition: background .2s;
+}
+.lx-volver:hover { background: rgba(0,0,0,.05); }
+
+/* ── cuerpo ───────────────────────────────────────────────────────── */
+.lx-cuerpo { max-width: var(--lx-ancho); margin: 32px auto; padding: 0 24px; }
+.lx-estrecho { max-width: var(--lx-ancho-estrecho); }
+
+/* Título grande de página («large title» de Apple) */
+.lx-titulo-grande {
+  font-family: var(--lx-letra-titulo);
+  font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.028em;
+  margin: 0 0 6px; color: var(--lx-tinta);
+}
+.lx-subtitulo { font-size: 17px; color: var(--lx-tinta-tenue); margin: 0 0 24px; }
+
+.lx-ficha {
+  background: var(--lx-papel);
+  border-radius: var(--lx-radio);
+  box-shadow: var(--lx-sombra);
+  border: 0;
+  padding: 26px;
+  margin-bottom: 20px;
+}
+
+.lx-titulo {
+  display: block; font-family: var(--lx-letra-titulo);
+  font-weight: 600; margin-bottom: 14px; font-size: 17px; letter-spacing: -.02em;
+}
+.lx-paso { color: var(--lx-tinta-tenue); font-weight: 400; }
+
+/* ── botones (píldora) ────────────────────────────────────────────── */
+.lx-boton {
+  /* inline-block para que valga igual en un <button> que en un <a>: un enlace
+     es inline por defecto, y un inline con padding vertical se DESBORDA sobre
+     la linea de arriba en vez de empujarla (se vio el 14-sep-2026: el boton de
+     descarga de Marcos a PDF se montaba encima de la lista de archivos). */
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  background: var(--lx-azul);
+  color: #fff;
+  border: 0;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: -.01em;
+  border-radius: var(--lx-radio-pill);
+  cursor: pointer;
+  transition: background .2s, transform .1s, box-shadow .2s;
+}
+.lx-boton:hover:not(:disabled) { background: #0077ed; }
+.lx-boton:active:not(:disabled) { background: #006edb; transform: scale(.98); }
+.lx-boton:disabled { background: #e8e8ed; color: #8e8e93; box-shadow: none; cursor: default; }
+.lx-boton:focus-visible { outline: none; box-shadow: var(--lx-foco); }
+.lx-boton.lx-secundario { background: #e8e8ed; color: var(--lx-tinta); }
+.lx-boton.lx-secundario:hover:not(:disabled) { background: #dcdce1; }
+
+/* ── campos ───────────────────────────────────────────────────────── */
+.lx-campo {
+  font: inherit; font-size: 15px; color: var(--lx-tinta);
+  background: #fff; border: 1px solid var(--lx-borde); border-radius: var(--lx-radio-chico);
+  padding: 9px 12px; transition: border-color .2s, box-shadow .2s;
+}
+.lx-campo:focus { outline: none; border-color: var(--lx-azul); box-shadow: var(--lx-foco); }
+
+/* ── zona para soltar archivos ────────────────────────────────────── */
+.lx-soltar {
+  border: 1.5px dashed #c7c7cc;
+  border-radius: var(--lx-radio);
+  padding: 32px;
+  text-align: center;
+  color: var(--lx-tinta-tenue);
+  cursor: pointer;
+  background: #fbfbfd;
+  transition: border-color .2s, background .2s;
+}
+.lx-soltar:hover, .lx-soltar.lx-encima {
+  border-color: var(--lx-azul);
+  background: #f2f8fe;
+}
+.lx-soltar input { display: none; }
+.lx-soltar strong { color: var(--lx-azul-medio); font-weight: 500; }
+
+/* ── avisos ───────────────────────────────────────────────────────── */
+.lx-nota  { font-size: 13px; color: var(--lx-tinta-tenue); line-height: 1.5; }
+.lx-ojo, .lx-error {
+  border-radius: var(--lx-radio-chico);
+  padding: 13px 16px;
+  font-size: 14px;
+  white-space: pre-line;
+  border: 0;
+}
+.lx-ojo   { color: var(--lx-ojo); background: var(--lx-ojo-fondo); }
+.lx-error { color: var(--lx-mal); background: var(--lx-mal-fondo); }
+
+/* ── datos en rejilla ─────────────────────────────────────────────── */
+.lx-rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.lx-dato {
+  background: var(--lx-azul-tenue);
+  border: 0;
+  border-radius: var(--lx-radio-chico);
+  padding: 14px 16px;
+}
+.lx-dato .lx-clave { font-size: 12.5px; font-weight: 400; color: var(--lx-tinta-tenue); }
+.lx-dato .lx-valor {
+  font-family: var(--lx-letra-titulo);
+  font-size: 22px; font-weight: 600; margin-top: 2px; letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+/* ── avance: que se vea que el programa trabaja ────────────────────── */
+/* Componente comun de la plataforma; lo maneja LX.progreso (lx-progreso.js).
+   Medido el 15-sep-2026: ocho de las nueve herramientas ponian una barra de
+   adorno que no decia nada, y la persona no sabia si seguia trabajando. */
+.lx-barra {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--lx-borde-soft);
+  overflow: hidden;
+  margin-top: 14px;
+}
+.lx-barra i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 3px;
+  background: var(--lx-azul);
+  transition: width .25s ease-out;
+}
+/* mientras no se sabe cuanto falta, va y viene */
+.lx-barra.lx-sin-saber i {
+  width: 40%;
+  transition: none;
+  animation: lx-corre 1.1s ease-in-out infinite;
+}
+@keyframes lx-corre {
+  0%   { margin-left: -40%; }
+  100% { margin-left: 100%; }
+}
+.lx-avance {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 7px;
+  font-size: 13px;
+  color: var(--lx-tinta-tenue);
+}
+.lx-avance b { color: var(--lx-tinta); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.lx-oculto { display: none !important; }
+.lx-pie {
+  text-align: center; color: var(--lx-tinta-tenue); font-size: 12px;
+  padding: 28px 20px 36px;
+  border-top: 1px solid var(--lx-borde-soft);
+  margin-top: 40px;
+}
+.lx-separador {
+  border: 0; border-top: 1px solid var(--lx-borde-soft); margin: 20px 0;
+}
+
+/* ── micro-animaciones suaves ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .lx-ficha, .tarjeta { transition: box-shadow .25s, transform .25s; }
+}
+
+/* ── Herramientas con cabecera propia (sin .lx-cabecera) ──────────────
+   Se les da la misma barra blanca translúcida sin tocar su HTML. Antes
+   (v2) era el degradado naval con texto blanco. */
+header:not(.lx-cabecera):not(.entrada):not(.panel-header),
+.header,
+.barra {
+  background: rgba(255,255,255,.82) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  color: var(--lx-tinta) !important;
+  border-bottom: 1px solid rgba(0,0,0,.08) !important;
+  box-shadow: none !important;
+}
+
+/* Quien prefiera menos animación, que no la tenga. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

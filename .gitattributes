@@ -1,0 +1,11 @@
+# Los .bat necesitan CRLF: con LF, cmd.exe se salta líneas en silencio.
+*.bat text eol=crlf
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.bin binary
