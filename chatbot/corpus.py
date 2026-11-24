@@ -245,21 +245,53 @@ def _titulo_del_articulo(cuerpo: str) -> str:
     sin_cabecera = RE_PRINCIPIO.sub("", sin_cabecera, count=1).strip()
     # «(Modificado por el artículo 3 de la Ley No. 51…)» va delante del título en la 108-05.
     sin_cabecera = re.sub(r"^\([^)]{0,160}\)\s*", "", sin_cabecera)
-    primera_linea = sin_cabecera.split("\n", 1)[0]
-    trozos = re.split(r"(?<=[.:])\s+", primera_linea, maxsplit=4)
-    titulo = []
-    for t in trozos[:-1]:
-        t = t.strip().rstrip(".:").strip()
-        if not t or len(t) > 100 or len(" ".join(titulo + [t])) > 120:
-            break
-        if not t[0].isupper():
-            break
-        titulo.append(t)
-        # Una frase con verbo conjugado típico ya es el cuerpo, no el título.
-        if re.search(r"\b(es|son|se|debe|deben|será|serán|podrá|tiene)\b", t.lower()):
-            titulo.pop()
-            break
+    # Todo el texto en una línea: la primera versión miraba solo la primera línea del PDF, y un
+    # título partido en dos («Publicidad de los actos de / levantamiento parcelario», el
+    # Art. 78 de la RES-789-2022, el que dice los 10 días) se perdía (24-nov-2026).
+    plano = " ".join(sin_cabecera.split())[:400]
+    trozos = _RE_FRASE.split(plano, maxsplit=3)
+    if len(trozos) < 2:
+        # En los PDF escaneados lo que sigue al título puede ir en minúscula («Suelo urbano.
+        # encuentre en…»): el corte de frase no salta, pero el título está igual.
+        if ". " not in plano:
+            return ""
+        trozos = [plano.split(". ")[0], plano.split(". ", 1)[1]]
+    # Hasta el primer punto: en los PDF escaneados la frase siguiente puede seguir en
+    # minúscula («Remediacion. remediacion a la que…») y colarse en el título.
+    primero = trozos[0].split(". ")[0].strip().rstrip(".:").strip()
+    if not _parece_titulo(primero, 110):
+        return ""
+    titulo = [primero]
+    # Un segundo trozo muy corto también es título: «Definición. Condiciones esenciales».
+    if len(trozos) > 2:
+        segundo = trozos[1].strip().rstrip(".:").strip()
+        if len(segundo.split()) <= 5 and _parece_titulo(segundo, 45):
+            titulo.append(segundo)
     return ". ".join(titulo)
+
+
+# Corte de frase: punto o dos puntos seguidos de mayúscula, salvo tras «núm.», «art.», «No.».
+_RE_FRASE = re.compile(r"(?<!\bnúm)(?<!\bnum)(?<!\bart)(?<!\bNo)(?<!\bno)[.:]\s+(?=[A-ZÁÉÍÓÚÑ])")
+_VERBO_DE_FRASE = re.compile(
+    r"\b(es|son|se|debe|deben|será|serán|podrá|podrán|puede|pueden|tiene|tienen|tendrá|"
+    r"tendrán|deroga|derogan|establece|dispone|aplica|modifica|comprende|corresponde|queda|"
+    r"quedan|procede|entra|entrará|rige|consiste|ordena|crea|denomina|refiere|regula|"
+    r"constituye|realiza|presenta|admite)\b", re.I)
+# «El proceso judicial», «El registro» (Ley 108-05) SÍ son títulos: los artículos solos no
+# delatan una frase; el verbo sí.
+_EMPIEZA_COMO_FRASE = re.compile(
+    r"^(en|se|para|cuando|todo|toda|todos|todas|si|con|a|por|al|esta|este|estos|estas|"
+    r"dicha|dicho|cada|ningún|ninguna|sin|siempre|salvo|corresponden?|queda[n]?)\b", re.I)
+
+
+def _parece_titulo(t: str, maximo: int) -> bool:
+    """Un título es corto, empieza en mayúscula y no es una oración (sin verbo conjugado ni
+    arranque de frase). «De las especificaciones técnicas» sí; «La presente resolución
+    deroga…» no."""
+    # El verbo de una relativa no delata frase: «Instrumento que crea el fideicomiso».
+    sin_relativas = re.sub(r"\bque\s+\w+(\s+\w+)?", " ", t, flags=re.I)
+    return (bool(t) and len(t) <= maximo and t[0].isupper()
+            and not _VERBO_DE_FRASE.search(sin_relativas) and not _EMPIEZA_COMO_FRASE.match(t))
 
 
 def _es_indice(cuerpo: str) -> bool:
@@ -596,15 +628,21 @@ def exportar_lista_de_normas(normas_json: Path, destino: Path) -> None:
 
 
 def exportar_vocabulario(origen: Path, destino: Path) -> None:
-    """El vocabulario del Revisor X (YAML) → JSON, para que el chatbot no necesite pyyaml."""
-    if not origen.exists():
-        return
+    """El vocabulario del Revisor X + el propio del chatbot (`vocabulario_extra.yaml`) → JSON,
+    para que el chatbot no necesite pyyaml. Si un término está en los dos, se SUMAN."""
     import yaml
+    from chatbot.archivos import escribir
 
-    datos = yaml.safe_load(origen.read_text(encoding="utf-8")) or {}
-    sinonimos = {k: list(v.get("equivalentes", [])) for k, v in
-                 (datos.get("sinonimos") or {}).items() if isinstance(v, dict)}
-    destino.write_text(json.dumps(sinonimos, ensure_ascii=False, indent=1), encoding="utf-8")
+    sinonimos: dict[str, list[str]] = {}
+    for ruta in (origen, origen.with_name("vocabulario_extra.yaml")):
+        if not ruta.exists():
+            continue
+        datos = yaml.safe_load(ruta.read_text(encoding="utf-8")) or {}
+        for k, v in (datos.get("sinonimos") or {}).items():
+            if isinstance(v, dict):
+                lista = sinonimos.setdefault(str(k), [])
+                lista += [e for e in v.get("equivalentes", []) if e not in lista]
+    escribir(destino, json.dumps(sinonimos, ensure_ascii=False, indent=1))
 
 
 def main() -> int:

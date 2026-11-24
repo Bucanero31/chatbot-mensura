@@ -182,11 +182,16 @@ class Vectores:
 
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+    import os
+
     from chatbot.buscador import Buscador
-    from chatbot.motor_local import motor
+    from chatbot.motor_local import MotorLocal, leer_config
 
     b = Buscador()
-    v = Vectores(motor(), b)
+    # Cálculo masivo: todos los hilos del procesador (en el servidor, con el chat abierto, el
+    # motor usa la mitad para no frenar al redactor).
+    m = MotorLocal({**leer_config(), "hilos_embeddings": os.cpu_count() or 4})
+    v = Vectores(m, b)
     t0 = time.time()
 
     def progreso(h, total):
@@ -195,7 +200,7 @@ def main() -> int:
 
     n = v.calcular(progreso)
     print(f"\n  {n} vectores nuevos; {len(v.matriz)} en total. {time.time() - t0:.0f} s")
-    motor().emb.parar()
+    m.emb.parar()
     return 0
 
 

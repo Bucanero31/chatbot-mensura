@@ -2,6 +2,30 @@
 
 Una entrada por sesión de trabajo, la más reciente arriba.
 
+## 24-nov-2026 (noche) · Preguntas «como pregunta la oficina» — A MEDIAS, seguir aquí
+
+Henry preguntó «¿qué tiempo tengo para realizar el levantamiento luego de notificar?» y el
+chatbot dijo «no encuentro». La norma lo dice (Res. 789-2022 Art. 78: 10 días calendarios
+antes; también Res. 790 Arts. 6 y 12, Res. 789 Art. 142). Causas y arreglos:
+- **Nueva batería `evaluacion/preguntas_oficina.yaml`** (54 preguntas coloquiales, auditada:
+  0 problemas). Medida de partida: acierto@5 66,7 %, evidencia al modelo 64,8 %.
+- **Títulos**: 1.591 artículos sin título (el extractor miraba solo la primera línea del PDF;
+  el del Art. 78 se perdía). Reescrito: quedan 1.025, y los que quedan son artículos sin título.
+- **Preguntas de plazo** (`buscador.RE_PIDE_PLAZO`): añaden «plazo, días, vigencia…», suben los
+  artículos con una duración y esa frase es la que llega al modelo.
+- **Vocabulario propio** `corpus/vocabulario_extra.yaml` (durar→vigencia, tardar→plazo,
+  avisar→comunicar, levantamiento→trabajos de campo…).
+- Resultado solo por palabras: oficina 66,7 → **85,2 %** @5 (evidencia 81,5 %); la batería de
+  las reglas se mantiene (90,2 %).
+
+**Pendiente para mañana:**
+1. Terminar los vectores (`py -m chatbot.vectores`: ~680 artículos cambiaron de título) y medir
+   la búsqueda combinada en las DOS baterías.
+2. Revisar los fallos que queden de `preguntas_oficina.yaml` (`evaluar.py --bateria
+   preguntas_oficina.yaml --vectores --fallos`).
+3. Pantalla: si la redacción dice «No encuentro», dejar las citas literales DESPLEGADAS.
+4. Probar la pregunta de Henry en la pantalla real, actualizar RESULTADOS.md y subir a GitHub.
+
 ## 24-nov-2026 (tarde) · Programa de Windows, GPU+CPU y análisis completo
 
 - **`Chatbot Mensura.exe`** (C# 5 compilado con el csc de .NET 4 de cualquier Windows, 20 KB):

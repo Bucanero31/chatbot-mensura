@@ -66,5 +66,171 @@
   "registro de profesionales",
   "codia",
   "matricula"
+ ],
+ "durar": [
+  "vigencia",
+  "plazo",
+  "vence",
+  "vencimiento"
+ ],
+ "dura": [
+  "vigencia",
+  "plazo",
+  "vence",
+  "vencimiento"
+ ],
+ "tardar": [
+  "plazo",
+  "dias",
+  "termino"
+ ],
+ "tarda": [
+  "plazo",
+  "dias",
+  "termino"
+ ],
+ "demora": [
+  "plazo",
+  "dias",
+  "termino"
+ ],
+ "demoran": [
+  "plazo",
+  "dias",
+  "termino"
+ ],
+ "tiempo": [
+  "plazo",
+  "dias",
+  "termino",
+  "anticipacion"
+ ],
+ "avisar": [
+  "comunicar",
+  "notificar",
+  "comunicacion",
+  "publicidad"
+ ],
+ "avisa": [
+  "comunicar",
+  "notificar",
+  "comunicacion",
+  "publicidad"
+ ],
+ "notificar": [
+  "comunicar",
+  "comunicacion",
+  "citacion",
+  "publicidad"
+ ],
+ "levantamiento": [
+  "trabajos de campo",
+  "operaciones de campo",
+  "mensura"
+ ],
+ "mensurar": [
+  "mensura",
+  "levantamiento parcelario"
+ ],
+ "empezar": [
+  "inicio",
+  "iniciar",
+  "comienzo"
+ ],
+ "empezo": [
+  "inicio",
+  "iniciar",
+  "comienzo"
+ ],
+ "apelar": [
+  "apelacion",
+  "recurso"
+ ],
+ "objetar": [
+  "objecion",
+  "oposicion"
+ ],
+ "corregir": [
+  "rectificar",
+  "rectificacion",
+  "correccion",
+  "subsanar"
+ ],
+ "colinda": [
+  "colindante",
+  "colindancia",
+  "lindero"
+ ],
+ "vecino": [
+  "colindante",
+  "colindancia"
+ ],
+ "vecinos": [
+  "colindante",
+  "colindancia"
+ ],
+ "terreno": [
+  "inmueble",
+  "parcela"
+ ],
+ "solar": [
+  "inmueble",
+  "parcela"
+ ],
+ "dueño": [
+  "propietario",
+  "titular"
+ ],
+ "dueno": [
+  "propietario",
+  "titular"
+ ],
+ "papeles": [
+  "documentos",
+  "documentacion"
+ ],
+ "juez": [
+  "tribunal"
+ ],
+ "votos": [
+  "mayoria",
+  "votacion"
+ ],
+ "cuesta": [
+  "tasa",
+  "tasas",
+  "pago"
+ ],
+ "costo": [
+  "tasa",
+  "tasas",
+  "pago"
+ ],
+ "rechazan": [
+  "rechazo",
+  "devolucion",
+  "admision",
+  "observacion"
+ ],
+ "rechazar": [
+  "rechazo",
+  "devolucion",
+  "admision",
+  "observacion"
+ ],
+ "tumbar": [
+  "remover",
+  "destruir",
+  "remocion"
+ ],
+ "firmar": [
+  "firma",
+  "firmado",
+  "suscribir"
+ ],
+ "fallar": [
+  "sentencia",
+  "decision",
+  "fallo"
  ]
 }

@@ -125,12 +125,22 @@ def _pesos(c: Consulta, buscador: Buscador) -> dict[str, float]:
         pesos[t] = buscador.indice.idf.get(t, 0.0)
     for t in c.expandidos:
         pesos.setdefault(t, 0.45 * buscador.indice.idf.get(t, 0.0))
+    if getattr(c, "pide_plazo", False):
+        # Pregunta de plazo: la frase con la DURACIÓN («diez (10) días…») vale tanto como la
+        # palabra más rara de la pregunta. Así es la que llega al modelo y a la respuesta.
+        pesos[_DURACION] = max(pesos.values(), default=1.0) or 1.0
     return pesos
 
 
+_DURACION = "__duracion__"
+
+
 def _puntuar(segmento: str, pesos: dict[str, float]) -> float:
+    from chatbot.buscador import RE_DURACION
     ts = set(terminos(segmento))
     bruto = sum(p for t, p in pesos.items() if t in ts)
+    if _DURACION in pesos and RE_DURACION.search(sin_tildes(segmento.lower())):
+        bruto += pesos[_DURACION]
     return bruto / (1 + len(segmento) / 700)
 
 

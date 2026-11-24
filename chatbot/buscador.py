@@ -45,6 +45,24 @@ PESO_SIGNIFICADO = 0.3       # medido con la batería: 0,3 da el mejor acierto@1
 ESTADOS_NORMALES = ("vigente", "por_confirmar")
 PALABRAS_HISTORICAS = {"derog", "anterior", "antigu", "viej", "histor", "antes", "derogacion"}
 
+# «¿Qué tiempo tengo…?», «¿cuánto dura…?», «¿cuánto se tarda…?»: la persona pregunta por un
+# PLAZO aunque no use esa palabra. Medido el 24-nov-2026 con la batería de la oficina: era el
+# fallo más frecuente (17 de 54 preguntas), y la norma lo escribe «diez (10) días calendarios
+# de anticipación», «vigencia», «término».
+RE_PIDE_PLAZO = re.compile(
+    r"\b(cuanto tiempo|que tiempo|tiempo tengo|tiempo tiene|cuanto dura|cuanto duran|"
+    r"cuanto (se )?tarda|cuanto (se )?tardan|cuanto (se )?demora|cuanto (se )?demoran|"
+    r"cuantos dias|cuantos meses|cuantos anos|cuantas horas|cuantas semanas|"
+    r"cuanto (tengo|tiene|tienen|hay) para|con cuanto|en cuanto tiempo|hasta cuando|"
+    r"desde cuando|cuando vence|vence|vencimiento|vigencia|plazo|plazos|antelacion|"
+    r"anticipacion|dias antes|dias despues|cuantos dias)\b")
+TERMINOS_DE_PLAZO = ["plazo", "días", "vigencia", "anticipación", "término", "vence"]
+# Una duración escrita como la escriben las normas: «diez (10) días», «90 días», «un año».
+RE_DURACION = re.compile(
+    r"\b(\w+\s*\(\d+\)|\d+|un|una|dos|tres|cinco|diez|quince|veinte|treinta|sesenta|"
+    r"noventa)\s+(dias|meses|anos|años|horas|semanas)\b")
+EMPUJE_DURACION = 1.35
+
 
 @dataclass
 class Unidad:
@@ -87,6 +105,7 @@ class Consulta:
     historica: bool
     similitudes: dict = field(default_factory=dict)   # unidad → coseno, si hubo vectores
     borradores: bool = False                          # ¿pregunta por proyectos en consulta?
+    pide_plazo: bool = False                          # ¿pregunta por un plazo o duración?
 
 
 class Buscador:
@@ -115,6 +134,7 @@ class Buscador:
         vocab_ruta = self.generado / "vocabulario.json"
         vocab = json.loads(vocab_ruta.read_text(encoding="utf-8")) if vocab_ruta.exists() else {}
         indice = _construir_indice(unidades, fichas)
+        con_duracion = {u.id for u in unidades if RE_DURACION.search(sin_tildes(u.texto.lower()))}
         sinonimos = {raiz(sin_tildes(k.lower())): [t for e in v for t in terminos(e)]
                      for k, v in vocab.items()}
         alias = _alias_de_normas(fichas)
@@ -141,6 +161,7 @@ class Buscador:
             self.indice = indice
             self.sinonimos = sinonimos
             self.alias = alias
+            self.con_duracion = con_duracion
 
     # ---------------------------------------------------------------- entender
     def entender(self, pregunta: str) -> Consulta:
@@ -156,8 +177,13 @@ class Buscador:
             self.normas[n]["estado"] == "derogada" for n in normas)
         borradores = any(t.startswith(p) for t in base
                          for p in ("proyect", "borrador", "propuest", "consult", "nuev", "futur"))
+        pide_plazo = bool(RE_PIDE_PLAZO.search(" ".join(palabras(pregunta))))
+        if pide_plazo:
+            for t in (x for p in TERMINOS_DE_PLAZO for x in terminos(p)):
+                if t not in base and t not in expandidos:
+                    expandidos.append(t)
         return Consulta(pregunta, base, expandidos, normas, arts, historica,
-                        borradores=borradores)
+                        borradores=borradores, pide_plazo=pide_plazo)
 
     def normas_nombradas(self, pregunta: str) -> list[str]:
         p = " " + " ".join(palabras(pregunta)) + " "
@@ -248,6 +274,14 @@ class Buscador:
                 por_unidad = fusion
 
         motivos: dict[int, str] = {}
+        # Pregunta de plazo: suben los artículos que de verdad traen una duración. Sin esto,
+        # «¿qué tiempo tengo para el levantamiento luego de notificar?» daba primero el que
+        # DEFINE la notificación (sin días) y el de los 10 días quedaba el 18.º.
+        if c.pide_plazo:
+            for u in list(por_unidad):
+                if u in self.con_duracion:
+                    por_unidad[u] *= EMPUJE_DURACION
+
         # Normas nombradas: empujón fuerte. Artículo nombrado: va primero.
         for n in c.normas_nombradas:
             for u in list(por_unidad):

@@ -164,6 +164,8 @@ def main() -> int:
     partes.add_argument("--vectores", action="store_true",
                         help="fusionar con la búsqueda por significado (arranca el modelo)")
     partes.add_argument("--peso", type=float, help="peso de la búsqueda por significado")
+    partes.add_argument("--bateria", default="preguntas.yaml",
+                        help="preguntas.yaml (de las reglas) o preguntas_oficina.yaml (coloquial)")
     args = partes.parse_args()
     if args.peso is not None:
         import chatbot.buscador as mod
@@ -186,7 +188,7 @@ def main() -> int:
         # batería se medían solo por palabras.
         motor().emb.asegurar()
         print(f"  vectores: {'listos' if b.vectores.listos else 'NO disponibles'}")
-    preguntas = cargar_bateria(RAIZ / "evaluacion" / "preguntas.yaml")
+    preguntas = cargar_bateria(RAIZ / "evaluacion" / args.bateria)
 
     problemas = auditar(b, preguntas)
     print(f"\n  Auditoría de la batería: {len(problemas)} problema(s)")

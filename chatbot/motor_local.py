@@ -477,8 +477,10 @@ class MotorLocal:
         dispositivo = (["--device", self.plan.tarjeta.argumento]
                        if en_gpu and self.plan.tarjeta else ["--device", "none", "-ngl", "0"])
         # Pocos hilos: una pregunta son ~30 tokens, y así no le roba procesador al redactor.
+        # Para calcular el corpus entero (sin chat abierto) se piden todos: `hilos_embeddings`.
+        hilos = int(self.cfg.get("hilos_embeddings") or max(2, self.equipo.nucleos // 2))
         return ["--embedding", *dispositivo, "-c", "2048", "-b", "2048", "-ub", "2048",
-                "-np", "1", "-t", str(max(2, self.equipo.nucleos // 2))]
+                "-np", "1", "-t", str(hilos), "-tb", str(hilos)]
 
     # ----------------------------------------------------------------- estado
     @property

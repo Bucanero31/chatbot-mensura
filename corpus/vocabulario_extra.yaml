@@ -1,0 +1,46 @@
+# Vocabulario PROPIO del chatbot: cómo pregunta la oficina → cómo escribe la norma.
+#
+# Se suma al del Revisor X (`vocabulario.yaml`, que se sincroniza y no se edita aquí).
+# Nació de la batería `evaluacion/preguntas_oficina.yaml` (24-nov-2026): preguntas escritas
+# como las hace la gente de una oficina de agrimensura. Con ellas, la búsqueda por palabras
+# solo acertaba el 66,7 % entre los 5 primeros: «¿cuánto dura la autorización?» no encontraba
+# «vigencia», «¿qué tiempo tengo…?» no encontraba «días de anticipación».
+#
+# Regla (la misma del Revisor X): cada equivalencia tiene que aparecer de verdad en el texto
+# de la norma; se comprueba con `evaluacion/evaluar.py --bateria preguntas_oficina.yaml`.
+
+sinonimos:
+  durar:        {equivalentes: [vigencia, plazo, vence, vencimiento]}
+  dura:         {equivalentes: [vigencia, plazo, vence, vencimiento]}
+  tardar:       {equivalentes: [plazo, dias, termino]}
+  tarda:        {equivalentes: [plazo, dias, termino]}
+  demora:       {equivalentes: [plazo, dias, termino]}
+  demoran:      {equivalentes: [plazo, dias, termino]}
+  tiempo:       {equivalentes: [plazo, dias, termino, anticipacion]}
+  avisar:       {equivalentes: [comunicar, notificar, comunicacion, publicidad]}
+  avisa:        {equivalentes: [comunicar, notificar, comunicacion, publicidad]}
+  notificar:    {equivalentes: [comunicar, comunicacion, citacion, publicidad]}
+  levantamiento: {equivalentes: [trabajos de campo, operaciones de campo, mensura]}
+  mensurar:     {equivalentes: [mensura, levantamiento parcelario]}
+  empezar:      {equivalentes: [inicio, iniciar, comienzo]}
+  empezo:       {equivalentes: [inicio, iniciar, comienzo]}
+  apelar:       {equivalentes: [apelacion, recurso]}
+  objetar:      {equivalentes: [objecion, oposicion]}
+  corregir:     {equivalentes: [rectificar, rectificacion, correccion, subsanar]}
+  colinda:      {equivalentes: [colindante, colindancia, lindero]}
+  vecino:       {equivalentes: [colindante, colindancia]}
+  vecinos:      {equivalentes: [colindante, colindancia]}
+  terreno:      {equivalentes: [inmueble, parcela]}
+  solar:        {equivalentes: [inmueble, parcela]}
+  dueño:        {equivalentes: [propietario, titular]}
+  dueno:        {equivalentes: [propietario, titular]}
+  papeles:      {equivalentes: [documentos, documentacion]}
+  juez:         {equivalentes: [tribunal]}
+  votos:        {equivalentes: [mayoria, votacion]}
+  cuesta:       {equivalentes: [tasa, tasas, pago]}
+  costo:        {equivalentes: [tasa, tasas, pago]}
+  rechazan:     {equivalentes: [rechazo, devolucion, admision, observacion]}
+  rechazar:     {equivalentes: [rechazo, devolucion, admision, observacion]}
+  tumbar:       {equivalentes: [remover, destruir, remocion]}
+  firmar:       {equivalentes: [firma, firmado, suscribir]}
+  fallar:       {equivalentes: [sentencia, decision, fallo]}

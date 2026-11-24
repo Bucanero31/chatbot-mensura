@@ -1,0 +1,463 @@
+# Batería «como pregunta la oficina»: coloquial, corta, sin las palabras de la norma.
+version: 1
+preguntas:
+  - id: O001
+    pregunta: "Que tiempo tengo para realizar el levantamiento luego de notificar"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 78"
+      - norma: RES-789-2022
+        articulo: "Art. 142"
+      - norma: RES-790-2022
+        articulo: "Art. 6"
+      - norma: RES-790-2022
+        articulo: "Art. 12"
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 23"
+        apartado: "5. Deslinde"
+    dato_clave: "diez (10) días calendarios"
+    origen: "texto: «por lo menos diez (10) días calendarios antes de la fecha de su inicio»"
+  - id: O002
+    pregunta: "en cuantos dias me contesta la regional la solicitud de saneamiento"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 40"
+      - norma: LEY-108-05
+        articulo: "Art. 25"
+    dato_clave: "veinte (20) días"
+    origen: "texto: «los veinte (20) días calendario de presentada la solicitud»"
+  - id: O003
+    pregunta: "cuanto dura la autorizacion para una subdivision"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 43"
+    dato_clave: "noventa días (90) calendario"
+    origen: "texto: «la vigencia de la autorización es de noventa días (90) calendario»"
+  - id: O004
+    pregunta: "y la autorizacion de saneamiento cuanto dura"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 43"
+    dato_clave: "sesenta (60) días calendario"
+    origen: "texto: «la autorización tiene una vigencia de sesenta (60) días calendario»"
+  - id: O005
+    pregunta: "se puede pedir prorroga de la autorizacion de saneamiento?"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 43"
+    dato_clave: "único término de treinta (30) días calendario"
+    origen: "texto: «prórroga de este plazo por un único término de treinta (30) días calendario»"
+  - id: O006
+    pregunta: "Cuanto tiempo tiene la regional para calificar un expediente de mensura"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 52"
+    dato_clave: "cuarenta y cinco (45) días hábiles"
+    origen: "texto: «calificar los expedientes dentro del plazo de cuarenta y cinco (45) días hábiles»"
+  - id: O007
+    pregunta: "si me observan el expediente cuantos dias tengo para corregir"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 33"
+    dato_clave: "treinta (30) días calendario"
+    origen: "texto: «un plazo, que no exceda los treinta (30) días calendario, para que se subsanen los defectos»"
+  - id: O008
+    pregunta: "hace cuanto puede estar emitida la certificacion de estado juridico"
+    categoria: plazos
+    esperado:
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 21"
+    dato_clave: "treinta (30) días"
+    origen: "texto: «fecha de emisión no mayor a treinta (30) días»"
+  - id: O009
+    pregunta: "cuanto dura una certificacion con reserva de prioridad"
+    categoria: plazos
+    esperado:
+      - norma: RES-788-2022
+        articulo: "Art. 156"
+      - norma: LEY-108-05
+        articulo: "Art. 105"
+    dato_clave: "quince (15) días"
+    origen: "texto: «vigencia no mayor de quince (15) días»"
+  - id: O010
+    pregunta: "que plazo hay para pedir reconsideracion de lo que decidio la regional"
+    categoria: recursos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 225"
+      - norma: LEY-108-05
+        articulo: "Art. 76"
+    dato_clave: "quince (15) días"
+    origen: "texto: «dentro de un plazo de quince (15) días hábiles contados a partir de la fecha de publicidad de la actuación»"
+  - id: O011
+    pregunta: "cuanto tengo para apelar una sentencia del tribunal"
+    categoria: recursos
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 81"
+    dato_clave: "treinta (30) días"
+    origen: "texto: «El plazo para interponer el recurso de apelación es de treinta (30) días»"
+  - id: O012
+    pregunta: "hasta cuando es valido el estado parcelario de un inmueble"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 147"
+    dato_clave: "veinte (20) años"
+    origen: "texto: «vigencia de veinte (20) años, contados a partir de la aprobación»"
+  - id: O013
+    pregunta: "desde cuando cuentan los dias de la autorizacion para mensurar"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 44"
+    dato_clave: "treinta (30) días hábiles luego de la emisión"
+    origen: "texto: «treinta (30) días hábiles luego de la emisión de dicha autorización»"
+  - id: O014
+    pregunta: "cuanto tiene el juez para dictar sentencia cuando el caso esta listo"
+    categoria: tribunales
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 67"
+    dato_clave: "sesenta (60) días"
+    origen: "texto: «el Tribunal tiene un plazo de sesenta (60) días para dictar sentencia»"
+  - id: O015
+    pregunta: "tribunal me manda a corregir la mensura cuanto tiempo tengo"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 59"
+    dato_clave: "treinta (30) días hábiles"
+    origen: "texto: «el agrimensor actuante tiene un plazo de treinta (30) días hábiles»"
+  - id: O016
+    pregunta: "subi el expediente por oficina virtual y salio pre aprobado cuanto tengo para llevar los originales"
+    categoria: plazos
+    esperado:
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 16"
+    dato_clave: "treinta (30) días hábiles"
+    origen: "texto: «depositar en un plazo no mayor a treinta (30) días hábiles»"
+  - id: O017
+    pregunta: "cuanto se tarda el registro de titulos en calificar"
+    categoria: registro_titulos
+    esperado:
+      - norma: RES-788-2022
+        articulo: "Art. 50"
+    dato_clave: "treinta (30) días hábiles"
+    origen: "texto: «plazo no mayor de treinta (30) días hábiles para ejercer y concretar su función calificadora»"
+  - id: O018
+    pregunta: "a los cuantos anos de inactividad se archiva un caso"
+    categoria: tribunales
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 38"
+    dato_clave: "tres (3) años"
+    origen: "texto: «transcurran tres (3) años de inactividad procesal»"
+  - id: O019
+    pregunta: "los colindantes cuanto tienen para objetar una superposicion"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 172"
+    dato_clave: "veinte (20) días hábiles"
+    origen: "texto: «un plazo de veinte (20) días hábiles, contados a partir de la recepción de dicha notificación»"
+  - id: O020
+    pregunta: "una anotacion preventiva caduca a los cuantos años"
+    categoria: registro_titulos
+    esperado:
+      - norma: DNRT-DT-2025-003
+        articulo: "Art. 24"
+        apartado: "16. Cancelación de anotación preventiva"
+    dato_clave: "dos (02) años"
+    origen: "texto: «por caducidad luego de que transcurren dos (02) años desde la emisión de la anotación»"
+  - id: O021
+    pregunta: "cuando caduca una hipoteca judicial provisional"
+    categoria: registro_titulos
+    esperado:
+      - norma: DNRT-DT-2025-003
+        articulo: "Art. 24"
+        apartado: "29. Cancelación de hipoteca judicial provisional"
+    dato_clave: "tres (3) años"
+    origen: "texto: «por efecto de la caducidad de tres (3) años, sin haber sido renovada»"
+  - id: O022
+    pregunta: "cuanto puedo variar el area en una regularizacion"
+    categoria: tolerancias
+    esperado:
+      - norma: RES-790-2022
+        articulo: "Art. 7"
+      - norma: RES-790-2022
+        articulo: "Art. 13"
+    dato_clave: "cinco por ciento (5%)"
+    origen: "texto: «sólo se admite una variación de hasta un cinco por ciento (5%)»"
+  - id: O023
+    pregunta: "cuantos decimales llevan las coordenadas"
+    categoria: tolerancias
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 113"
+    dato_clave: "dos decimales"
+    origen: "texto: «Las coordenadas deben expresarse en metros con dos decimales»"
+  - id: O024
+    pregunta: "las medidas de las areas en el condominio con cuantos decimales"
+    categoria: tolerancias
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 212"
+      - norma: DNMC-DT-2023-004
+        articulo: "Art. 9"
+    dato_clave: "dos decimales"
+    origen: "texto: «medidas de superficie expresadas en metros cuadrados con dos decimales»"
+  - id: O025
+    pregunta: "una caseta pequena hay que levantarla como construccion"
+    categoria: levantamiento
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 100"
+    dato_clave: "cinco (5) metros cuadrados"
+    origen: "texto: «superficies cubiertas aisladas inferiores a cinco (5) metros cuadrados»"
+  - id: O026
+    pregunta: "los balcones y aleros se miden o no"
+    categoria: levantamiento
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 100"
+    dato_clave: "0.60 metros"
+    origen: "texto: «aleros, balcones y salientes en altura inferiores a 0.60 metros»"
+  - id: O027
+    pregunta: "que distancia minima debe haber entre los puntos georreferenciados"
+    categoria: levantamiento
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 108"
+    dato_clave: "cincuenta (50) metros"
+    origen: "texto: «a una distancia no menor de cincuenta (50) metros»"
+  - id: O028
+    pregunta: "cuantos caracteres lleva el nombre de un PG"
+    categoria: levantamiento
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 108"
+    dato_clave: "cuatro (4) caracteres"
+    origen: "texto: «tener cuatro (4) caracteres alfabéticos, numéricos o alfanuméricos»"
+  - id: O029
+    pregunta: "de que tamaño es el letrero de la mensura"
+    categoria: notificaciones
+    esperado:
+      - norma: DNMC-DT-2023-009
+        articulo: "Art. 17"
+    dato_clave: "81.28 cm x 60.96 cm"
+    origen: "texto: «Dimensiones mínimas: 81.28 cm x 60.96 cm»"
+  - id: O030
+    pregunta: "que nivel de confianza se pide en el informe gnss"
+    categoria: levantamiento
+    esperado:
+      - norma: DNMC-DT-2023-007
+        articulo: "Art. 4"
+    dato_clave: "95%"
+    origen: "texto: «Nivel de confianza al 95% (1.96 sigmas)»"
+  - id: O031
+    pregunta: "que documentos se piden para subdividir una parcela"
+    categoria: documentos
+    esperado:
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 23"
+        apartado: "16. Subdivisión"
+    dato_clave: "Duplicado(s) del Certificado(s) de Título"
+    origen: "texto: «f) Duplicado(s) del Certificado(s) de Título»"
+  - id: O032
+    pregunta: "para un deslinde hay que llevar la constancia anotada?"
+    categoria: documentos
+    esperado:
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 23"
+        apartado: "5. Deslinde"
+    dato_clave: "Duplicado(s) de la(s) Constancia(s) Anotada(s)"
+    origen: "texto: «f) Duplicado(s) de la(s) Constancia(s) Anotada(s)»"
+  - id: O033
+    pregunta: "hay que publicar en el periodico el deslinde"
+    categoria: notificaciones
+    esperado:
+      - norma: DNMC-DT-2023-001
+        articulo: "Art. 23"
+        apartado: "5. Deslinde"
+    dato_clave: "periódico de circulación nacional"
+    origen: "texto: «publicación de la fecha de los trabajos de campo, en un periódico de circulación nacional»"
+  - id: O034
+    pregunta: "que hago si el colindante no quiere firmar la notificacion"
+    categoria: notificaciones
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 78"
+    dato_clave: "hace constar dicha situación en la copia de la comunicación"
+    origen: "texto: «el agrimensor hace constar dicha situación en la copia de la comunicación»"
+  - id: O035
+    pregunta: "si los colindantes no van el dia de la mensura se puede hacer igual"
+    categoria: notificaciones
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 78"
+    dato_clave: "La inasistencia de los colindantes no impide la ejecución del acto"
+    origen: "texto: «La inasistencia de los colindantes no impide la ejecución del acto»"
+  - id: O036
+    pregunta: "en el acta de hitos que tengo que poner de las notificaciones"
+    categoria: notificaciones
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 78"
+    dato_clave: "a quiénes ha comunicado"
+    origen: "texto: «indicar a quiénes ha comunicado, cómo lo ha hecho»"
+  - id: O037
+    pregunta: "si colinda con un rio a quien se le notifica"
+    categoria: notificaciones
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 78"
+    dato_clave: "dominio público"
+    origen: "texto: «En caso de colindancia con el dominio público, se debe notificar al organismo que ejerce la función de control»"
+  - id: O038
+    pregunta: "el agrimensor puede mandar a otro a recorrer el terreno?"
+    categoria: levantamiento
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 85"
+    dato_clave: "no puede delegar en otra persona"
+    origen: "texto: «El agrimensor no puede delegar en otra persona»"
+  - id: O039
+    pregunta: "los hitos que ya estan en el terreno hay que tomarlos?"
+    categoria: hitos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 90"
+    dato_clave: "identificados y posicionados"
+    origen: "texto: «Los hitos existentes ... deben ser identificados y posicionados»"
+  - id: O040
+    pregunta: "para que sirven los hitos"
+    categoria: hitos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 110"
+    dato_clave: "publicitar materialmente"
+    origen: "texto: «Los hitos cumplen la función de publicitar materialmente en el terreno los límites parcelarios»"
+  - id: O041
+    pregunta: "con cuantos votos se decide algo en la asamblea del condominio"
+    categoria: condominios
+    esperado:
+      - norma: LEY-5038-1958
+        articulo: "Art. 12"
+    dato_clave: "mayoría de votos de todos los interesados"
+    origen: "texto: «resoluciones ... tomadas por mayoría de votos de todos los interesados»"
+  - id: O042
+    pregunta: "se puede cambiar el porcentaje de votos de un propietario"
+    categoria: condominios
+    esperado:
+      - norma: LEY-5038-1958
+        articulo: "Art. 12"
+    dato_clave: "consentimiento unánime de todos los propietarios"
+    origen: "texto: «solo podrá modificarse por el consentimiento unánime de todos los propietarios»"
+  - id: O043
+    pregunta: "a los cuantos dias hay que irse si alguien ocupa ilegal un inmueble"
+    categoria: ley_108_05
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 48"
+    dato_clave: "quince (15) días"
+    origen: "texto: «intimándole para que en el plazo de quince (15) días abandone el inmueble»"
+  - id: O044
+    pregunta: "con cuanta anticipacion avisan un desalojo"
+    categoria: ley_108_05
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 49"
+    dato_clave: "quince (15) días antes"
+    origen: "texto: «por lo menos quince (15) días antes de proceder a su ejecución»"
+  - id: O045
+    pregunta: "cuantos jueces tiene como minimo un tribunal superior de tierras"
+    categoria: tribunales
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 6"
+    dato_clave: "cinco (5) jueces"
+    origen: "texto: «no menos de cinco (5) jueces»"
+  - id: O046
+    pregunta: "quien conoce las litis sobre terrenos registrados"
+    categoria: tribunales
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 29"
+    dato_clave: "únicos competentes para conocer de las litis"
+    origen: "texto: «son los únicos competentes para conocer de las litis sobre derechos registrados»"
+  - id: O047
+    pregunta: "cuanto tiene el tribunal para avisar a los reclamantes que empezo el saneamiento"
+    categoria: tribunales
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 26"
+      - norma: RES-787-2022
+        articulo: "Art. 113"
+    dato_clave: "quince (15) días"
+    origen: "texto: «En un plazo no mayor de quince (15) días, el tribunal ... debe notificar a los reclamantes»"
+  - id: O048
+    pregunta: "pido inspeccion de campo y en cuantos dias me responden"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 36"
+    dato_clave: "diez (10) días hábiles"
+    origen: "texto: «pondera la solicitud de inspección dentro de un plazo de diez (10) días hábiles»"
+  - id: O049
+    pregunta: "si hay una mensura desplazada cuanto tiempo se da para corregir"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 180"
+    dato_clave: "sesenta (60) días"
+    origen: "texto: «en un plazo no mayor de sesenta (60) días realice la corrección de lugar»"
+  - id: O050
+    pregunta: "cuanto hay para notificar la reconsideracion a las partes"
+    categoria: recursos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 230"
+    dato_clave: "dos (2) días francos"
+    origen: "texto: «depositada dentro del plazo de dos (2) días francos»"
+  - id: O051
+    pregunta: "plazo para llevar el recurso al tribunal superior despues de la regional"
+    categoria: recursos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 237"
+      - norma: LEY-108-05
+        articulo: "Art. 78"
+    dato_clave: "treinta (30) días"
+    origen: "texto: «dentro de un plazo de treinta (30) días hábiles, a partir de la fecha en que el recurso queda habilitado»"
+  - id: O052
+    pregunta: "cuanto se demoran en dar un duplicado del certificado de titulo"
+    categoria: registro_titulos
+    esperado:
+      - norma: RES-788-2022
+        articulo: "Art. 93"
+    dato_clave: "quince (15) días hábiles"
+    origen: "texto: «en un plazo no mayor de quince (15) días hábiles, una vez recibida la solicitud»"
+  - id: O053
+    pregunta: "que multa hay por tumbar un hito"
+    categoria: ley_108_05
+    esperado:
+      - norma: LEY-108-05
+        articulo: "Art. 114"
+    dato_clave: "cinco (5) veces el salario mínimo"
+    origen: "texto: «multa equivalente de veinticinco por ciento (25%) a cinco (5) veces el salario mínimo»"
+  - id: O054
+    pregunta: "cuando hay urgencia la regional en cuantos dias califica"
+    categoria: plazos
+    esperado:
+      - norma: RES-789-2022
+        articulo: "Art. 67"
+    dato_clave: "quince (15) días"
+    origen: "texto: «un plazo de quince (15) días a partir de la recepción de dicha solicitud para emitir su calificación»"
