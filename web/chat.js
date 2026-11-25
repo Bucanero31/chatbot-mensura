@@ -227,6 +227,13 @@
       bFinal.hidden = false;
       bFinal.innerHTML = '<span class="etq">Respuesta</span><div class="cuerpo">' + formato(f.texto, nf) + '</div>';
       if (!bRapida.classList.contains('citas')) pliegaRapida();
+      // Si el redactor no encontró la respuesta, las citas literales NO se esconden: a veces
+      // la respuesta está en ellas y el modelo no la vio (caso real del 24-nov-2026).
+      if (/no encuentro/i.test(f.texto || '') && bRapida.tagName === 'DETAILS') {
+        bRapida.open = true;
+        var s = bRapida.querySelector('summary');
+        if (s) s.textContent = 'Lo más cercano en la normativa (citas literales)';
+      }
       notas.innerHTML = '';
       avisos(f.avisos, 'Compruébalo:');
       if (f.modelo) notas.appendChild(el('p', 'meta', esc(f.modelo) + (f.segundos != null ? ' · ' + esc(f.segundos) + ' s' : '')));

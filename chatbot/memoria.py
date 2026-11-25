@@ -15,7 +15,7 @@ puntería, pero ninguna regla normativa cambia por el uso.
 
 | Señal | Peso | De dónde sale |
 |---|---|---|
-| Citado por el redactor y verificado sin avisos | +0,4 | automático |
+| Citado por el redactor y verificado sin avisos, en 2+ preguntas distintas | hasta +0,4 | automático |
 | 👍 de la persona | +1,0 | `api/valorar` |
 | 👎 de la persona | −1,0 | `api/valorar` (y la pregunta queda en `pendientes`) |
 
@@ -43,6 +43,7 @@ from chatbot.texto import sin_tildes, terminos
 
 PARECIDO_MINIMO = 0.5        # Jaccard entre raíces para considerar dos preguntas «parecidas»
 PESO_IMPLICITO = 0.4
+MINIMO_PREGUNTAS_IMPLICITO = 2   # preguntas DISTINTAS que citan lo mismo sin que nadie valore
 PESO_POSITIVO = 1.0
 PESO_NEGATIVO = -1.0
 
@@ -163,6 +164,9 @@ class Memoria:
         if not consulta:
             return {}
         acumulado: dict[tuple[str, str, str], float] = defaultdict(float)
+        # Lo implícito (nadie lo valoró) se guarda aparte, con la mejor señal de cada pregunta
+        # DISTINTA: repetir la misma pregunta diez veces no son diez opiniones.
+        implicito: dict[tuple[str, str, str], dict[str, float]] = defaultdict(dict)
         with self._cerrojo:
             # Solo las que comparten alguna palabra: las demás no pueden llegar al 0,5.
             ids = set().union(*(self._por_termino.get(t, set()) for t in consulta))
@@ -175,11 +179,23 @@ class Memoria:
             if parecido < PARECIDO_MINIMO:
                 continue
             util = e.get("util")
-            peso = PESO_POSITIVO if util is True else PESO_NEGATIVO if util is False \
-                else (PESO_IMPLICITO if e.get("implicito", True) and not e.get("avisos")
-                      else 0.0)
+            if util is None:
+                if e.get("implicito", True) and not e.get("avisos"):
+                    for c in e.get("citas", []):
+                        previo = implicito[tuple(c)].get(e.get("clave", ""), 0.0)
+                        implicito[tuple(c)][e.get("clave", "")] = max(previo, parecido)
+                continue
+            peso = PESO_POSITIVO if util else PESO_NEGATIVO
             for c in e.get("citas", []):
                 acumulado[tuple(c)] += parecido * peso
+        # Una cita que el modelo eligió UNA vez no enseña nada: es su propia elección, y darle
+        # empujón la vuelve a poner delante la vez siguiente. Pasó el 25-nov-2026: el modelo
+        # citó por error el plazo de las superposiciones (Res. 789 Art. 172) a «¿qué tiempo
+        # tengo para el levantamiento luego de notificar?», y desde entonces ese artículo salía
+        # PRIMERO para esa pregunta. Hace falta que lo citen al menos dos preguntas distintas.
+        for cita, por_pregunta in implicito.items():
+            if len(por_pregunta) >= MINIMO_PREGUNTAS_IMPLICITO:
+                acumulado[cita] += PESO_IMPLICITO * sum(sorted(por_pregunta.values())[-3:]) / 3
         return {k: max(-1.0, min(1.0, v)) for k, v in acumulado.items() if v}
 
     def en_cache(self, pregunta: str, version_corpus: str) -> dict | None:
@@ -195,7 +211,10 @@ class Memoria:
         for e in sorted(candidatas, key=lambda e: (e.get("util") is True, e["fecha"]),
                         reverse=True):
             completa = self._completa(e)
-            if completa and completa.get("respuesta"):
+            # Un «No encuentro» NO es una respuesta que repetir: es un fallo, y repetirlo desde
+            # la caché lo hace permanente (pasó con la pregunta de los 10 días, 25-nov-2026).
+            if completa and completa.get("respuesta") and \
+                    "no encuentro" not in sin_tildes(completa["respuesta"].lower()):
                 return completa
         return None
 

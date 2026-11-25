@@ -2,7 +2,27 @@
 
 Una entrada por sesión de trabajo, la más reciente arriba.
 
-## 24-nov-2026 (noche) · Preguntas «como pregunta la oficina» — A MEDIAS, seguir aquí
+## 25-nov-2026 · La pregunta de los 10 días, arreglada de punta a punta
+
+Seguía fallando tras lo de anoche: la búsqueda ya traía la regla, pero el modelo contestaba
+«veinte (20) días hábiles» (superposiciones, Art. 172). Cinco causas, cinco arreglos, cada uno
+con su prueba (85 pruebas pasan). Números en `evaluacion/RESULTADOS.md` §2b.
+- **El trámite que la pregunta no nombra baja ×0,85** (`buscador.TRAMITES_CONCRETOS`): título,
+  apartado, sección, y el título de la norma si nombra uno solo. Art. 78 pasa del 7.º al 1.º.
+- **La memoria se reforzaba con sus errores**: una cita del modelo, sin valorar, la ponía primero
+  la vez siguiente. Ahora lo implícito exige dos preguntas DISTINTAS (`memoria.sugerencias`).
+- **El modelo ve la sección de cada fragmento** y se le dice que la regla general manda si no
+  se nombra trámite (`responder.SISTEMA`, regla 8).
+- **Caché**: la versión incluye el contenido del código que busca y redacta. Cambié el prompt sin
+  subir `VERSION_BUSQUEDA` y la caché repitió la respuesta mala.
+- **Redacción abandonada** → «cancelada», no «listo» vacío con aviso. Y el modelo de embeddings
+  busca otro puerto si el suyo lo tiene otro programa (evaluar con el chatbot abierto daba
+  «embeddings aún no listos»).
+- Batería: P016 acepta también Res. 789 Art. 78 (es la regla general; la DT la repite).
+- Comprobado en la pantalla con 4 variantes de la pregunta (general, colindantes, saneamiento,
+  superposición): las 4 correctas.
+
+## 24-nov-2026 (noche) · Preguntas «como pregunta la oficina» (terminado el 25-nov)
 
 Henry preguntó «¿qué tiempo tengo para realizar el levantamiento luego de notificar?» y el
 chatbot dijo «no encuentro». La norma lo dice (Res. 789-2022 Art. 78: 10 días calendarios

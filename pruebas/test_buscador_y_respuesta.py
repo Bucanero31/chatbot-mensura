@@ -52,6 +52,23 @@ def test_tramite_por_apartado(buscador):
     assert any(r.unidad.apartado == "5. Deslinde" for r in res)
 
 
+def test_pregunta_general_trae_la_regla_general(buscador):
+    """La pregunta de Henry del 25-nov-2026. Sin trámite nombrado, la regla general de los
+    10 días (Res. 789 Art. 78) tiene que llegar al modelo (4 fragmentos), y el plazo de las
+    superposiciones (Art. 172, 20 días hábiles), que el modelo contestó por error, no."""
+    _, res = buscador.buscar("Que tiempo tengo para realizar el levantamiento luego de notificar",
+                             k=6)
+    refs = [(r.unidad.norma, r.unidad.articulo) for r in res[:4]]
+    assert ("RES-789-2022", "Art. 78") in refs
+    assert ("RES-789-2022", "Art. 172") not in refs
+    assert ("RES-3645-2016", "Art. 9") not in refs
+
+
+def test_el_tramite_nombrado_no_se_penaliza(buscador):
+    _, res = buscador.buscar("¿con cuántos días se publica la mensura para saneamiento?", k=4)
+    assert ("RES-789-2022", "Art. 142") in [(r.unidad.norma, r.unidad.articulo) for r in res]
+
+
 # ---------------------------------------------------------------- respuesta
 def test_ficha_de_vigencia_primero(buscador):
     c, res = buscador.buscar("¿está vigente la 355-2009?")

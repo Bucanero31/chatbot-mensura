@@ -331,6 +331,20 @@ def _atar_a_este_proceso(proceso: subprocess.Popen) -> None:
         log.debug("no pude atar llama-server al proceso: %s", e)
 
 
+def _puerto_ocupado(puerto: int) -> bool:
+    import socket
+    with socket.socket() as s:
+        s.settimeout(0.5)
+        return s.connect_ex(("127.0.0.1", puerto)) == 0
+
+
+def _puerto_libre() -> int:
+    import socket
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
 # ---------------------------------------------------------------------------
 # Un proceso llama-server
 # ---------------------------------------------------------------------------
@@ -394,6 +408,12 @@ class Servidor:
             if self.vivo():
                 return True
             if self.proceso is None or self.proceso.poll() is not None:
+                if _puerto_ocupado(self.puerto):
+                    # Ocupado por OTRO programa (p. ej. el chatbot abierto mientras se evalúa):
+                    # con su clave no lo podemos usar, y arrancar encima falla. Puerto libre.
+                    viejo, self.puerto = self.puerto, _puerto_libre()
+                    log.info("%s: el puerto %d está ocupado por otro programa; uso el %d",
+                             self.papel, viejo, self.puerto)
                 rutas.DATOS.mkdir(parents=True, exist_ok=True)
                 salida = self.registro.open("ab")
                 orden = [str(BINARIO), "-m", str(self.modelo), "--host", "127.0.0.1",

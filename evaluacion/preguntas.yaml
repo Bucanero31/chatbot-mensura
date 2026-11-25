@@ -138,6 +138,10 @@ preguntas:
     - norma: DNMC-DT-2023-001
       articulo: Sección 5
       subdivision: Secciones 5 y 13
+    # Añadido el 25-nov-2026: la regla GENERAL de los 10 días es esta; la Disposición la
+    # repite por trámite. Henry lo señaló con su pregunta del levantamiento.
+    - norma: RES-789-2022
+      articulo: Art. 78
     dato_clave: diez (10)
     origen: reglas/tolerancias.yaml
   - id: P017

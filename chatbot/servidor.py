@@ -20,6 +20,7 @@ import threading
 import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from chatbot import rutas
@@ -101,8 +102,29 @@ class Aplicacion:
             log.warning("no pude guardar en la memoria (¿disco lleno?): %s", e)
 
     def _version(self) -> str:
-        ruta = rutas.GENERADO / "articulos.jsonl"
-        return time.strftime("%Y-%m-%d", time.localtime(ruta.stat().st_mtime)) if ruta.exists() else ""
+        """Huella de lo que decide una respuesta: corpus, vocabulario y versión del buscador.
+
+        Antes era la FECHA del corpus: el 24-nov-2026 se arregló la búsqueda y se reconstruyó el
+        corpus el mismo día, y la caché siguió sirviendo «No encuentro» a la pregunta que se
+        acababa de arreglar. Cualquier cambio en estas tres cosas invalida la caché.
+
+        Y el CÓDIGO que busca y redacta, por su contenido: el 25-nov-2026 se cambiaron las
+        instrucciones al modelo sin subir VERSION_BUSQUEDA y la caché repitió la respuesta mala.
+        Depender de acordarse de subir un número ya falló una vez."""
+        import hashlib
+        from chatbot.buscador import VERSION_BUSQUEDA
+        h = hashlib.sha1(VERSION_BUSQUEDA.encode())
+        for nombre in ("articulos.jsonl", "normas.json", "vocabulario.json"):
+            ruta = rutas.GENERADO / nombre
+            if ruta.exists():
+                h.update(f"{nombre}:{ruta.stat().st_size}:{ruta.stat().st_mtime_ns}".encode())
+        codigo = Path(__file__).resolve().parent
+        for nombre in ("buscador.py", "responder.py", "texto.py"):
+            try:
+                h.update((codigo / nombre).read_bytes())
+            except OSError:
+                pass
+        return h.hexdigest()[:12]
 
     def recargar(self) -> None:
         """Tras una actualización del corpus: el buscador nuevo entra sin parar el servidor."""
@@ -182,6 +204,13 @@ class Aplicacion:
             bruto = self.motor.redactar(mensajes_para_modelo(pregunta, fuentes, historial),
                                         al_escribir=empezar, cancelado=t.abandonado,
                                         max_tokens=800 if pide_lista(pregunta) else None)
+            if t.abandonado():
+                # Cortada a medias porque nadie la seguía: no es una respuesta. Como «listo»
+                # salía vacía y con el aviso «no cita ninguna fuente» a quien volviera a la
+                # pestaña; así la pantalla se queda con las citas literales.
+                with t.cerrojo:
+                    t.estado = "cancelada"
+                return
             texto = limpiar(bruto)
             v = verificar(texto, fuentes)
             citadas = [f for f in fuentes if f.n in v["citas"]]

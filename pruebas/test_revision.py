@@ -122,6 +122,28 @@ def test_ping(puerto):
     assert b"mensura" in c.getresponse().read()
 
 
+def test_redaccion_abandonada_queda_cancelada_y_no_se_aprende(tmp_path):
+    """25-nov-2026: cortada por falta de sondeo, salía como «listo», vacía y con el aviso «no
+    cita ninguna fuente». Tiene que quedar «cancelada» (la pantalla muestra las citas)."""
+    import chatbot.servidor as srv
+    from chatbot.memoria import Memoria
+
+    class _Redacta(_SinModelo):
+        nombre = "falso"
+
+        def redactar(self, mensajes, al_escribir=None, cancelado=None, max_tokens=None):
+            return "texto a medias"
+
+    app = srv.Aplicacion.__new__(srv.Aplicacion)
+    app.motor, app.memoria, app.version = _Redacta(), Memoria(tmp_path), "v"
+    app.fila, app.cerrojo = [], threading.Lock()
+    t = srv.Trabajo("x")
+    t.ultimo_sondeo -= srv.ABANDONADA_TRAS + 5
+    app._redactar(t, "¿qué es un deslinde?", [], [])
+    assert t.estado == "cancelada" and t.final is None
+    assert not app.memoria.entradas
+
+
 def test_puerto_en_exclusiva(puerto):
     import chatbot.servidor as srv
     with pytest.raises(OSError):
@@ -134,6 +156,29 @@ def test_lo_redactado_con_historial_no_va_a_la_cache(tmp_path):
     m.anotar("a", "¿cuáles son los plazos?", [], "Los del deslinde…", [], "gemma", "v1",
              con_historial=True)
     assert m.en_cache("¿cuáles son los plazos?", "v1") is None
+
+
+def test_un_no_encuentro_no_se_sirve_de_la_cache(tmp_path):
+    """Caso real del 25-nov-2026: la caché repetía «No encuentro» a una pregunta ya arreglada."""
+    m = Memoria(tmp_path)
+    m.anotar("n", "que tiempo tengo para el levantamiento", [],
+             "No encuentro esto en la normativa cargada.", [], "gemma", "v1")
+    assert m.en_cache("que tiempo tengo para el levantamiento", "v1") is None
+
+
+def test_una_cita_sin_valorar_no_se_refuerza_sola(tmp_path):
+    """Caso real del 25-nov-2026: el modelo citó por error el Art. 172 una vez, y desde entonces
+    la memoria lo ponía primero para la misma pregunta. Repetirla no son varias opiniones."""
+    m = Memoria(tmp_path)
+    for i in range(3):
+        m.anotar(f"r{i}", "que tiempo tengo para el levantamiento luego de notificar",
+                 [("RES-789-2022", "Art. 172", "")], "veinte días", [], "gemma", "v1")
+    t = ["tiemp", "levant", "lueg", "notif"]
+    assert ("RES-789-2022", "Art. 172", "") not in m.sugerencias(t)
+    # Dos preguntas DISTINTAS que citan lo mismo, sí enseñan.
+    m.anotar("o", "cuanto tiempo tengo para el levantamiento luego de notificar",
+             [("RES-789-2022", "Art. 172", "")], "veinte días", [], "gemma", "v1")
+    assert m.sugerencias(t)[("RES-789-2022", "Art. 172", "")] > 0
 
 
 def test_la_cache_lee_la_respuesta_del_disco(tmp_path):

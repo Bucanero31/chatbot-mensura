@@ -61,6 +61,53 @@ deslindes…») en lugar del e) («variación de hasta un cinco por ciento»), p
 el mejor artículo) es ≥ 0,50 en el 90 % de las preguntas de la batería; 6 de las 10 ajenas
 quedan por debajo de 0,45, que es el umbral. Las ajenas que pasan, las frena el modelo.
 
+## 2b. Las preguntas como las hace la oficina (25-nov-2026)
+
+Henry preguntó «¿qué tiempo tengo para realizar el levantamiento luego de notificar?» y el
+chatbot dijo «no encuentro», aunque la Res. 789-2022 Art. 78 lo dice (10 días calendarios
+antes). La batería de las reglas no lo veía: está redactada con las palabras de la norma.
+Segunda batería, **`preguntas_oficina.yaml`**: 54 preguntas coloquiales (Sonnet, auditadas: 0
+problemas). Búsqueda combinada (palabras + significado), `--sin-memoria`:
+
+| | Reglas @1 | @3 | @5 | @8 | Evid. | Oficina @1 | @3 | @5 | @8 | Evid. |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 24-nov, solo palabras | — | — | — | — | — | — | — | 66,7 | — | 64,8 |
+| + títulos, plazos, vocabulario propio, vectores rehechos | 67,4 | — | 92,4 | 95,7 | 89,4 | 51,9 | — | 94,4 | 98,1 | 98,1 |
+| **+ el trámite que la pregunta no nombra baja (×0,85)** | **68,5** | **91,3** | **93,5** | **94,6** | **91,5** | **55,6** | **85,2** | **98,1** | **100** | **94,4** |
+
+**Lo que se cambió el 25-nov, y por qué:**
+
+- **Pregunta general → regla general.** Para la pregunta de Henry salían primero la publicidad
+  del *saneamiento*, la objeción de la *superposición* y la *refundición*; la regla general quedaba
+  7.ª y el modelo contestó «veinte (20) días hábiles» (el plazo para objetar una superposición).
+  Ahora un artículo cuyo título, apartado o sección nombra un trámite que la pregunta no nombra
+  baja ×0,85 (y el título de la norma cuenta si nombra UN solo trámite). Medidas 1,0 / 0,85 / 0,8
+  / 0,7, con y sin sección: 0,85 con sección es la mejor. Coste: P035 sale del top 8 (su artículo
+  está en el capítulo de la regularización parcelaria).
+- **La memoria se reforzaba con sus propios errores.** El modelo citó el Art. 172 una vez y desde
+  entonces la memoria lo ponía PRIMERO para esa pregunta (+0,24 del máximo). Lo implícito (nadie
+  lo valoró) ya solo cuenta si lo citan **dos preguntas distintas**; repetir la misma no suma.
+- **Al modelo se le dice de qué trámite es cada fragmento** (la sección va en la cabecera) y que
+  van ordenados por pertinencia. Sin trámite nombrado, debe dar la regla general.
+- **La caché repetía respuestas malas tras un arreglo**: su versión ya incluye el contenido de
+  `buscador.py`, `responder.py` y `texto.py`, no un número que hay que acordarse de subir.
+- **Pantalla**: un «No encuentro» deja las citas literales desplegadas, y una redacción cortada
+  por abandono queda «cancelada» (antes salía vacía y con el aviso «no cita ninguna fuente»).
+
+**Evidencia de la oficina 98,1 → 94,4 %:** en O036 y O037 el dato («dominio público», «a quiénes
+ha comunicado») llegaba desde el artículo del *saneamiento* (Art. 142), no desde el esperado
+(Art. 78). Ahora delante van la DT-2023-009 Arts. 9/12/13 (notificación a colindantes, al
+Ministerio, al Estado) y el Art. 121 (acta de hitos): pertinentes, pero sin esa frase literal.
+
+**Comprobado en la pantalla real** (Gemma 3 4B, GTX 1050):
+
+| Pregunta | Respuesta | Fuente |
+|---|---|---|
+| Que tiempo tengo para realizar el levantamiento luego de notificar | al menos diez (10) días calendarios antes del inicio | Res. 789 Art. 78 |
+| cuantos dias antes tengo que avisarle a los colindantes que voy a medir | diez (10) días calendarios | Res. 789 Art. 142 / 78 |
+| con cuanta anticipacion se cita a los colindantes en un saneamiento | diez (10) días calendarios | Res. 789 Art. 142 |
+| si hay una superposicion cuanto tiempo tengo para objetar | veinte (20) días hábiles desde la notificación | Res. 789 Art. 172 |
+
 ## 3. Los modelos locales como redactores (24-nov)
 
 `comparar_modelos.py`: mismas 12 preguntas con dato clave + 3 ajenas, mismos artículos de
@@ -90,7 +137,7 @@ reduce el tiempo a la tercera parte.
 
 Un agente que no vio el razonamiento de quien construyó el programa lo revisó entero y
 encontró **15 problemas reales**, todos corregidos y cada uno con su prueba en
-`pruebas/test_revision.py` (80 pruebas en total):
+`pruebas/test_revision.py` (80 pruebas en total entonces; 85 al 25-nov):
 
 | # | Gravedad | Problema | Corrección |
 |---|---|---|---|

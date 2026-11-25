@@ -355,7 +355,11 @@ añade a partir de los corchetes.
 5. Si un fragmento dice TEXTO ANTERIOR o DEROGADA, no lo presentes como vigente.
 6. Si los fragmentos no responden la pregunta, contesta solo: «No encuentro esto en la \
 normativa cargada.» No inventes ni completes con conocimiento propio.
-7. Máximo 160 palabras, salvo que pidan una lista de requisitos o documentos."""
+7. Máximo 160 palabras, salvo que pidan una lista de requisitos o documentos.
+8. Los fragmentos van ordenados del más al menos pertinente. Si la pregunta no nombra un \
+trámite concreto, responde con la regla general. Lo que un fragmento dice para un trámite \
+concreto (saneamiento, superposición, refundición…) no es la regla general: si lo mencionas, \
+di de qué trámite es."""
 
 
 def mensajes_para_modelo(pregunta: str, fuentes: list[Fuente],
@@ -370,7 +374,10 @@ def mensajes_para_modelo(pregunta: str, fuentes: list[Fuente],
             marcas.append("TEXTO ANTERIOR, YA REFORMADO")
         titulo = f" — {f.titulo}" if f.titulo else ""
         apartado = f" — {f.apartado}" if f.apartado else ""
-        cabecera_f = f"[{f.n}] {f.norma_titulo}{apartado}{titulo}"
+        # La sección dice de qué trámite es («Título VI · De la superposición»): sin ella el
+        # modelo tomó el plazo de las superposiciones por el general (25-nov-2026).
+        seccion = f" — {f.seccion}" if f.seccion else ""
+        cabecera_f = f"[{f.n}] {f.norma_titulo}{seccion}{apartado}{titulo}"
         if marcas:
             cabecera_f += f" ({', '.join(marcas)})"
         # La primera fuente es la más probable: va con el doble de contexto, para que la

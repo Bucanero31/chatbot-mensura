@@ -45,6 +45,10 @@ PESO_SIGNIFICADO = 0.3       # medido con la batería: 0,3 da el mejor acierto@1
 ESTADOS_NORMALES = ("vigente", "por_confirmar")
 PALABRAS_HISTORICAS = {"derog", "anterior", "antigu", "viej", "histor", "antes", "derogacion"}
 
+# Subir este número al cambiar CÓMO se busca o se responde: invalida la caché de respuestas
+# (servidor._version). Si no, una pregunta ya arreglada sigue devolviendo la respuesta vieja.
+VERSION_BUSQUEDA = "2026-11-25.2"
+
 # «¿Qué tiempo tengo…?», «¿cuánto dura…?», «¿cuánto se tarda…?»: la persona pregunta por un
 # PLAZO aunque no use esa palabra. Medido el 24-nov-2026 con la batería de la oficina: era el
 # fallo más frecuente (17 de 54 preguntas), y la norma lo escribe «diez (10) días calendarios
@@ -53,7 +57,10 @@ RE_PIDE_PLAZO = re.compile(
     r"\b(cuanto tiempo|que tiempo|tiempo tengo|tiempo tiene|cuanto dura|cuanto duran|"
     r"cuanto (se )?tarda|cuanto (se )?tardan|cuanto (se )?demora|cuanto (se )?demoran|"
     r"cuantos dias|cuantos meses|cuantos anos|cuantas horas|cuantas semanas|"
-    r"cuanto (tengo|tiene|tienen|hay) para|con cuanto|en cuanto tiempo|hasta cuando|"
+    # «¿cuánto tiene el juez para…?»: «tiene» y «para» no van juntos; pero «¿cuánto tiene de
+    # área?» no es un plazo.
+    r"cuanto (tengo|tiene|tienen|hay)\b(?! de (area|superficie|frente|fondo))|"
+    r"con cuanto|en cuanto tiempo|hasta cuando|"
     r"desde cuando|cuando vence|vence|vencimiento|vigencia|plazo|plazos|antelacion|"
     r"anticipacion|dias antes|dias despues|cuantos dias)\b")
 TERMINOS_DE_PLAZO = ["plazo", "días", "vigencia", "anticipación", "término", "vence"]
@@ -62,6 +69,18 @@ RE_DURACION = re.compile(
     r"\b(\w+\s*\(\d+\)|\d+|un|una|dos|tres|cinco|diez|quince|veinte|treinta|sesenta|"
     r"noventa)\s+(dias|meses|anos|años|horas|semanas)\b")
 EMPUJE_DURACION = 1.35
+
+# Pregunta GENERAL → regla GENERAL. «¿Qué tiempo tengo para el levantamiento luego de
+# notificar?» (25-nov-2026) ponía delante la publicidad del SANEAMIENTO, la notificación de la
+# SUPERPOSICIÓN y la REFUNDICIÓN, y la regla general (Res. 789 Art. 78) quedaba séptima; el
+# modelo contestó con el plazo de las superposiciones. Un artículo cuyo título nombra un trámite
+# concreto que la pregunta NO nombra, baja un poco.
+TRAMITES_CONCRETOS = (
+    "saneamiento", "deslinde", "regularización", "subdivisión", "refundición", "condominio",
+    "superposición", "superpuesta", "inspección", "urbanización", "desafectación", "anulación",
+    "peritaje", "litis", "hipoteca", "fideicomiso", "prórroga", "reconsideración", "apelación",
+    "casación", "embargo", "sucesión", "partición", "expropiación", "desplazada")
+PENALIZA_OTRO_TRAMITE = 0.85   # medido: 0,85 da lo mismo que 0,8 en reglas y +2 en la oficina
 
 
 @dataclass
@@ -135,6 +154,23 @@ class Buscador:
         vocab = json.loads(vocab_ruta.read_text(encoding="utf-8")) if vocab_ruta.exists() else {}
         indice = _construir_indice(unidades, fichas)
         con_duracion = {u.id for u in unidades if RE_DURACION.search(sin_tildes(u.texto.lower()))}
+        raices_tramite = {t for x in TRAMITES_CONCRETOS for t in terminos(x)}
+        # El título de la NORMA cuenta solo si nombra UN trámite («Soluciones de Mensuras
+        # Superpuestas», «Peritajes Catastrales»). La Res. 790 nombra dos («regularización
+        # parcelaria y deslinde») y trae reglas generales: esa no.
+        de_un_tramite = {}
+        for ident, ficha in fichas.items():
+            propios = set(terminos(ficha.get("titulo", ""))) & raices_tramite
+            if len(propios) == 1:
+                de_un_tramite[ident] = propios
+        tramites_de = {}
+        for u in unidades:
+            # Título, apartado y sección: «Objeción a los trabajos» no nombra el trámite, pero
+            # está en «Título VI · De la superposición».
+            propios = set(terminos(f"{u.titulo} {u.apartado} {u.seccion}")) & raices_tramite
+            propios |= de_un_tramite.get(u.norma, set())
+            if propios:
+                tramites_de[u.id] = propios
         sinonimos = {raiz(sin_tildes(k.lower())): [t for e in v for t in terminos(e)]
                      for k, v in vocab.items()}
         alias = _alias_de_normas(fichas)
@@ -162,6 +198,8 @@ class Buscador:
             self.sinonimos = sinonimos
             self.alias = alias
             self.con_duracion = con_duracion
+            self.raices_tramite = raices_tramite
+            self.tramites_de = tramites_de
 
     # ---------------------------------------------------------------- entender
     def entender(self, pregunta: str) -> Consulta:
@@ -281,6 +319,14 @@ class Buscador:
             for u in list(por_unidad):
                 if u in self.con_duracion:
                     por_unidad[u] *= EMPUJE_DURACION
+        # Lo que la pregunta nombra, por sí, por sinónimo («dividir» → subdivisión) o por la
+        # pregunta anterior («¿y en saneamiento?»).
+        pregunta_tramites = (set(c.terminos) | set(c.expandidos) | set(contexto)) \
+            & self.raices_tramite
+        for u in list(por_unidad):
+            del_articulo = self.tramites_de.get(u)
+            if del_articulo and not (del_articulo & pregunta_tramites):
+                por_unidad[u] *= PENALIZA_OTRO_TRAMITE
 
         # Normas nombradas: empujón fuerte. Artículo nombrado: va primero.
         for n in c.normas_nombradas:
